@@ -1,0 +1,44 @@
+# Despliegue automático a Cloudflare Pages en cada push a main.
+#
+# Por qué una Action y no la integración nativa de Git de Pages: el proyecto
+# `mvp-validacion-cardiologia` se creó como "subida directa" y Cloudflare no
+# permite convertirlo a Git-conectado. Conectarlo de forma nativa obligaría a
+# borrarlo y recrearlo, perdiendo el historial de despliegues (y dejando el
+# enlace caído un rato). Esta Action da el mismo resultado —push y se publica—
+# sin tocar el proyecto existente ni su URL.
+name: Desplegar a Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  # Si llegan dos pushes seguidos, solo se publica el último.
+  group: paginas-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  desplegar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Publicar dist/ en Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          # El id de cuenta no es secreto: aparece en las URLs del panel.
+          accountId: 3ef30388d4fe09f7ab77f4b42ad5e93b
+          command: pages deploy dist --project-name=mvp-validacion-cardiologia --branch=main
