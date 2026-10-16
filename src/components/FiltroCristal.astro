@@ -1,0 +1,16 @@
+---
+/* Filtro de refracción del cristal.
+   feTurbulence genera un ruido suave y feDisplacementMap lo usa para desviar
+   los píxeles del fondo: eso es lo que da la sensación de mirar a través de
+   vidrio y no de un simple desenfoque. Se declara una sola vez por página. */
+---
+<svg class="filtros" width="0" height="0" aria-hidden="true" focusable="false">
+  <filter id="lg" x="-12%" y="-12%" width="124%" height="124%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.012 0.015" numOctaves="2" seed="11" result="ruido"/>
+    <feGaussianBlur in="ruido" stdDeviation="3" result="ruidoSuave"/>
+    <feDisplacementMap in="SourceGraphic" in2="ruidoSuave" scale="22" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+<style>
+  .filtros{position:absolute;width:0;height:0;overflow:hidden}
+</style>

@@ -1,0 +1,50 @@
+/* =========================================================================
+   4. NEUMORFISMO iOS — sombra suave única, squircle, texto a alto contraste.
+      El efecto vive en la superficie; el texto siempre plano y contrastado.
+   ========================================================================= */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 26px;
+  border:1px solid var(--glass-border,transparent);
+  border-radius:var(--r-btn);
+  font:600 .98rem/1 var(--font-body);
+  letter-spacing:-.01em;
+  cursor:pointer;text-decoration:none;
+  transition:transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.btn--primary{background:var(--accent);color:#fff;box-shadow:var(--shadow-accent)}
+.btn--primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-accent-lift)}
+.btn--primary:active{transform:translateY(1px) scale(.988);box-shadow:inset 0 2px 9px rgba(0,0,0,.30)}
+.btn--ghost{background:var(--surface);color:var(--brand);box-shadow:var(--shadow)}
+.btn--ghost:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift)}
+.btn--ghost:active{transform:translateY(1px) scale(.988);box-shadow:var(--shadow-press)}
+.btn--lg{padding:18px 32px;font-size:1.05rem}
+.btn svg{width:18px;height:18px;flex:none}
+
+.card{
+  background:var(--surface);
+  border-radius:var(--r-card);
+  padding:calc(clamp(20px,2.2vw,28px) * var(--air));
+  box-shadow:var(--shadow);
+  transition:transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.card:active{transform:translateY(1px) scale(.995);box-shadow:var(--shadow-press)}
+.card__icon{
+  width:46px;height:46px;border-radius:14px;
+  display:grid;place-items:center;
+  background:var(--bg);color:var(--accent);
+  box-shadow:var(--shadow);
+  margin-bottom:var(--sp-4);
+}
+.card__icon svg{width:24px;height:24px}
+.card p{color:var(--ink-2);margin-top:var(--sp-3);font-size:.95rem}
+.card ul{margin-top:var(--sp-4);display:grid;gap:var(--sp-2)}
+.card li{
+  position:relative;padding-left:20px;
+  font-size:.88rem;color:var(--ink-2);line-height:1.45;
+}
+.card li::before{
+  content:"";position:absolute;left:0;top:.52em;
+  width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:.75;
+}

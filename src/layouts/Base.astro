@@ -1,0 +1,94 @@
+---
+import { META } from '../data/sitio';
+
+/* El orden de los estilos importa: cada hoja asume las anteriores.
+   tokens → base → layout → componentes → nav → secciones → responsive →
+   cristal → táctil. Astro los agrupa en un solo CSS al construir. */
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/layout.css';
+import '../styles/componentes.css';
+import '../styles/nav.css';
+import '../styles/secciones.css';
+import '../styles/responsive.css';
+import '../styles/cristal.css';
+import '../styles/tactil.css';
+
+import Fondo from '../components/Fondo.astro';
+import FiltroCristal from '../components/FiltroCristal.astro';
+import Nav from '../components/Nav.astro';
+---
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{META.titulo}</title>
+  <meta name="description" content={META.descripcion} />
+  {!META.indexable && <meta name="robots" content="noindex, nofollow" />}
+  <meta name="theme-color" content="#F1EDEE" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+</head>
+<body>
+  <FiltroCristal />
+  <Fondo />
+
+  <a class="sr-only" href="#contacto">Saltar a contacto</a>
+
+  <main class="deck" id="deck">
+    <slot />
+  </main>
+
+  <Nav />
+
+  <script>
+    /* El recorrido es vertical y lo hace el scroll nativo. Este script solo
+       sincroniza el indicador del menú y suaviza los saltos: sin él, los
+       enlaces siguen funcionando como anclas y los CTA como enlaces. */
+    const paneles = Array.from(document.querySelectorAll<HTMLElement>('.panel'));
+    const enlaces = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav a'));
+    const menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let actual = -1;
+
+    function marcar(i: number) {
+      if (i === actual) return;
+      actual = i;
+      enlaces.forEach((a, n) => {
+        if (n === i) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    }
+
+    enlaces.forEach((a, i) => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        paneles[i].scrollIntoView({ behavior: menosMovimiento.matches ? 'auto' : 'smooth', block: 'start' });
+        marcar(i);
+      });
+    });
+
+    /* La sección activa es la que cruza el medio del viewport. Se calcula a
+       mano en vez de usar IntersectionObserver: una sección más alta que la
+       pantalla nunca llega a ser visible al 50% de sí misma, así que un
+       threshold deja el indicador atrás al desplazarse a mano. */
+    function seccionEnVista() {
+      const medio = window.scrollY + window.innerHeight / 2;
+      let i = 0;
+      for (let n = 0; n < paneles.length; n++) if (paneles[n].offsetTop <= medio) i = n;
+      return i;
+    }
+
+    let pendiente = false;
+    window.addEventListener('scroll', () => {
+      if (pendiente) return;
+      pendiente = true;
+      requestAnimationFrame(() => { pendiente = false; marcar(seccionEnVista()); });
+    }, { passive: true });
+
+    marcar(seccionEnVista());
+  </script>
+</body>
+</html>

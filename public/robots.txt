@@ -1,0 +1,3 @@
+# MVP de validación, no es un sitio público.
+User-agent: *
+Disallow: /

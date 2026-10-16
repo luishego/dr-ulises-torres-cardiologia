@@ -1,0 +1,39 @@
+---
+import Icono from './Icono.astro';
+import { HERO } from '../data/contenido';
+import { enlaceWhatsapp } from '../data/sitio';
+---
+<section class="panel" id="inicio" aria-labelledby="t-inicio">
+  <div class="panel__inner hero">
+    <div>
+      <p class="eyebrow">{HERO.eyebrow}</p>
+      <h1 id="t-inicio">{HERO.titulo}</h1>
+      <div class="rule"></div>
+      <p class="lead">{HERO.lead}</p>
+      <div class="cta-row">
+        <a class="btn btn--primary btn--lg" href={enlaceWhatsapp()} rel="noopener">
+          <Icono nombre="calendario" />
+          {HERO.ctaPrimario}
+        </a>
+        <a class="btn btn--ghost btn--lg" href="#servicios">{HERO.ctaSecundario}</a>
+      </div>
+    </div>
+
+    <figure class="hero__media">
+      {/* Al recibir el retrato, sustituir este bloque por:
+          <img class="foto" src="/img/dr-torres.jpg" width="900" height="1125"
+               alt="Dr. Ulises Torres Aguiñaga, médico internista y cardiólogo" />
+          Relación 4:5, lado mayor ≥ 1600 px. */}
+      <div class="foto" role="img" aria-label={HERO.retrato.alt}>
+        <Icono nombre="silueta" class="foto__mark" />
+        <p class="foto__badge">{HERO.retrato.leyenda}</p>
+      </div>
+      <figcaption class="hero__ecg" aria-hidden="true">
+        <svg viewBox="0 0 400 34" preserveAspectRatio="none" fill="none" stroke="currentColor"
+             stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M0 20h120l10-12 9 24 10-27 9 15 8-6h224"/>
+        </svg>
+      </figcaption>
+    </figure>
+  </div>
+</section>

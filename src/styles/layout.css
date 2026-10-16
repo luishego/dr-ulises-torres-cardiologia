@@ -1,0 +1,38 @@
+/* =========================================================================
+   3. LAYOUT — mobile primero
+   La base es el teléfono: una columna con el scroll vertical nativo, sin
+   depender de JavaScript ni de ningún override. A partir de 768px se
+   ACTIVA el deck lateral con scroll-snap. Antes era al revés y el móvil
+   heredaba una cascada de correcciones; ahora recibe el camino más corto.
+   ========================================================================= */
+.deck{display:block}
+
+.panel{
+  width:100%;
+  padding:clamp(56px,9vw,72px) 20px;
+  scroll-margin-top:calc(76px + env(safe-area-inset-top, 0px));
+}
+.panel + .panel{border-top:1px solid var(--line)}
+.panel:first-child{padding-top:calc(clamp(56px,9vw,72px) + env(safe-area-inset-top, 0px))}
+.panel:last-child{padding-bottom:var(--nav-safe)}
+
+.panel__inner{
+  width:min(var(--inner-max,1140px),100%);
+  margin-inline:auto;
+  padding:var(--inner-pad,0);
+  border-radius:var(--inner-radius,0);
+  background:var(--inner-bg,transparent);
+  border:1px solid var(--inner-border,transparent);
+  box-shadow:var(--inner-shadow,none);
+  -webkit-backdrop-filter:var(--inner-blur,none);
+  backdrop-filter:var(--inner-blur,none);
+}
+
+/* ---- 768px en adelante: el mismo recorrido vertical, con más aire ---- */
+@media (min-width:768px){
+  .panel{
+    padding:clamp(56px,7vh,92px) clamp(24px,5vw,88px);
+    scroll-margin-top:16px;
+  }
+  .panel:last-child{padding-bottom:var(--nav-safe)}
+}

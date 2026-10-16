@@ -1,0 +1,67 @@
+/* =========================================================================
+   9. CRISTAL — superficies de vidrio
+   La capa de fondo vive en el componente Fondo.astro, porque de ella
+   depende qué obra se muestra. Aquí quedan solo las superficies.
+   ========================================================================= */
+/* Superficies de cristal. */
+.card,.btn--ghost,.nav,.plate,.fact,
+.data > div,.contact__box,.foto,.foto__badge,.card__icon,.alert{
+  -webkit-backdrop-filter:var(--glass,none);
+  backdrop-filter:var(--glass,none);
+  border:1px solid var(--glass-border,transparent);
+}
+
+/* La nav flota sobre la obra sin panel intermedio: necesita más opacidad
+   que las tarjetas para sostener AA sobre los rojos profundos. */
+.nav{
+  background:rgba(255,255,255,.82);
+}
+.alert{
+  background:color-mix(in srgb,var(--accent) 10%,rgba(255,255,255,.84));
+}
+.foto::after{opacity:.45}
+
+/* --- Refracción de vidrio -----------------------------------------------
+   Dos declaraciones a propósito, sin var():
+   1) desenfoque clásico, que entienden todos los navegadores;
+   2) la misma capa pasada por el filtro SVG.
+   Si el navegador no admite url() en backdrop-filter —Safari con el prefijo
+   -webkit- no lo hace— descarta la SEGUNDA y se queda con la primera, así
+   que nunca se pierde el vidrio. Con var() esto no funcionaría: una var()
+   inválida anula la propiedad entera en lugar de caer a la anterior. */
+.filtros{position:absolute;width:0;height:0;overflow:hidden}
+
+.panel__inner,
+.card,
+.contact__box,
+.plate,
+.fact,
+.data > div,
+.foto{
+  -webkit-backdrop-filter:blur(14px) saturate(180%);
+  backdrop-filter:blur(14px) saturate(180%);
+  backdrop-filter:url(#lg) blur(6px) saturate(180%);
+}
+
+/* Quien prefiera menos movimiento visual se queda con el vidrio liso. */
+@media (prefers-reduced-motion: reduce){
+  .panel__inner,
+  .card,
+  .contact__box,
+  .plate,
+  .fact,
+  .data > div,
+  .foto{
+    backdrop-filter:blur(14px) saturate(180%);
+  }
+}
+h3{font-weight:500}
+
+/* Fusión 3 respira distinto: el panel de cristal ya aporta su propio
+   margen interno, así que el ritmo vertical se compacta para que las
+   secciones sigan cabiendo en una pantalla. */
+.rule{margin:var(--sp-4) 0}
+.grid-3,
+.grid-2,
+.facts{margin-top:var(--sp-5)}
+#servicios .card{padding:calc(clamp(16px,1.6vw,22px) * var(--air))}

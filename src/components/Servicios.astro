@@ -1,0 +1,23 @@
+---
+import Icono from './Icono.astro';
+import { SERVICIOS } from '../data/contenido';
+---
+<section class="panel" id="servicios" aria-labelledby="t-servicios">
+  <div class="panel__inner">
+    <p class="eyebrow">{SERVICIOS.eyebrow}</p>
+    <h2 id="t-servicios">{SERVICIOS.titulo}</h2>
+    <div class="rule"></div>
+    <p class="lead">{SERVICIOS.lead}</p>
+
+    <div class="grid-3">
+      {SERVICIOS.items.map((s) => (
+        <article class="card">
+          <div class="card__icon"><Icono nombre={s.icono} /></div>
+          <h3>{s.titulo}</h3>
+          <p>{s.texto}</p>
+          <ul>{s.puntos.map((p) => <li>{p}</li>)}</ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

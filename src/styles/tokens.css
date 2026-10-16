@@ -1,0 +1,67 @@
+/* =========================================================================
+   1. TOKENS — dirección única: Cristal.
+      Colores de marca reales: #494769 navy · #9B1643 vino.
+      El sitio tuvo tres fusiones mientras se decidía la dirección; el
+      Dr. Torres eligió Cristal y las otras dos se retiraron. Lo que queda
+      es un solo set de variables, sin atributo de tema que conmutar.
+   ========================================================================= */
+:root{
+  --navy:#494769;
+  --vino:#9B1643;
+
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px;
+  --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px;
+
+  --nav-safe:calc(clamp(96px,13vh,124px) + env(safe-area-inset-bottom, 0px));
+  --dur:.2s;
+  --ease:cubic-bezier(.2,.7,.3,1);
+
+  --bg:#F1EDEE;
+  --surface:rgba(255,255,255,.55);
+  --surface-2:rgba(255,255,255,.74);
+  --ink:#232238;
+  --ink-2:#4B4964;
+  --brand:#494769;
+  --accent:#9B1643;
+  --line:rgba(73,71,105,.18);
+
+  --font-display:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-body:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;
+  --display-weight:300;
+  --display-tracking:-.03em;
+  --display-leading:1.03;
+
+  --eyebrow-color:#9B1643;
+  --title-color:#494769;
+  --rule-color:rgba(155,22,67,.45);
+
+  --r-card:24px;
+  --r-btn:999px;
+  --r-pill:999px;
+
+  /* El reflejo interior superior es lo que hace leer el borde como vidrio
+     y no como papel. Va en el token para que sobreviva a hover y active. */
+  --shadow:0 2px 12px rgba(73,71,105,.10), inset 0 1px 0 #ffffff5c;
+  --shadow-lift:0 14px 34px rgba(73,71,105,.16), inset 0 1px 0 #ffffff5c;
+  --shadow-press:inset 0 2px 9px rgba(73,71,105,.20);
+  --shadow-accent:0 2px 12px rgba(155,22,67,.28);
+  --shadow-accent-lift:0 12px 30px rgba(155,22,67,.32);
+
+  --air:1;
+  --panel-pad-y:clamp(28px,4.4vh,52px);
+
+  /* Cristal de componente (tarjetas, nav, chips). */
+  --glass:blur(14px) saturate(180%);
+  --glass-border:rgba(255,255,255,.62);
+
+  /* Cristal contenedor: el vidrio grande que sostiene cada sección.
+     El 78% de opacidad no es una preferencia estética: es el mínimo que
+     sostiene AA sobre cualquier imagen de fondo. No bajarlo. */
+  --inner-max:1060px;
+  --inner-bg:rgba(255,255,255,.78);
+  --inner-blur:blur(30px) saturate(175%);
+  --inner-border:rgba(255,255,255,.78);
+  --inner-radius:34px;
+  --inner-pad:clamp(22px,2.4vw,38px);
+  --inner-shadow:0 24px 70px rgba(73,71,105,.18);
+}

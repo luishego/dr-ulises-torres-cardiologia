@@ -1,0 +1,29 @@
+---
+import { SOBRE } from '../data/contenido';
+---
+<section class="panel" id="sobre" aria-labelledby="t-sobre">
+  <div class="panel__inner split">
+    <div>
+      <p class="eyebrow">{SOBRE.eyebrow}</p>
+      <h2 id="t-sobre">{SOBRE.titulo}</h2>
+      <div class="rule"></div>
+      <div class="plate">
+        <strong>{SOBRE.nombre}</strong>
+        <span>{SOBRE.especialidades}</span>
+      </div>
+      <div class="facts">
+        {SOBRE.datos.map((d) => (
+          <div class="fact">
+            <b class={'siglaPendiente' in d && d.siglaPendiente ? 'ph' : undefined}>{d.sigla}</b>
+            <span>
+              {d.texto}{'textoPendiente' in d && d.textoPendiente && <> — <span class="ph">{d.textoPendiente}</span></>}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="prose">
+      {SOBRE.parrafos.map((p) => <p>{p}</p>)}
+    </div>
+  </div>
+</section>

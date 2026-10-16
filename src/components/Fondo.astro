@@ -1,0 +1,57 @@
+---
+/* Capa de obra a sangre completa, detrás de todo.
+   Qué se muestra lo decide FONDO en src/data/sitio.ts. */
+import { FONDO, MEZCLA_TEJIDO } from '../data/sitio';
+
+const ATARDECER = '/img/fondo-atardecer.webp';
+const TEJIDO = '/img/fondo-tejido.webp';
+
+/* El atardecer es un degradado suave de 512×512: estirarlo conserva todo el
+   cielo, mientras que `cover` recortaría el azul de arriba y el naranja de
+   abajo, que es justo lo que le da el carácter. El tejido sí es una obra
+   compuesta y se comporta mejor con `cover`. */
+const base = FONDO === 'tejido'
+  ? { imagen: TEJIDO, tamano: 'cover' }
+  : { imagen: ATARDECER, tamano: '100% 100%' };
+---
+
+<div class:list={['fondo', FONDO === 'ambos' && 'fondo--mezcla']} aria-hidden="true"></div>
+
+<style define:vars={{
+  imagenBase: `url("${base.imagen}")`,
+  tamanoBase: base.tamano,
+  imagenTejido: `url("${TEJIDO}")`,
+  mezcla: String(MEZCLA_TEJIDO),
+}}>
+  .fondo{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    /* Si la imagen faltara, este color sostiene el contraste igual. */
+    background-color:#F1EDEE;
+    background-image:var(--imagenBase);
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:var(--tamanoBase);
+  }
+
+  /* Modo 'ambos': el tejido encima del cielo. No es solo apilar dos imágenes
+     bonitas — el cielo es un degradado sin bordes, y sin bordes el filtro de
+     refracción no tiene nada que desviar. El tejido aporta ese contraste
+     local; el cielo, el color y la atmósfera. */
+  .fondo--mezcla::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:var(--imagenTejido);
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+    opacity:var(--mezcla);
+    mix-blend-mode:soft-light;
+  }
+
+  /* Velo: baja un punto la saturación para que el vidrio se lea como vidrio. */
+  .fondo::after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.06)}
+</style>

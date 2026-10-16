@@ -1,0 +1,21 @@
+{
+  "name": "dr-ulises-torres-cardiologia",
+  "type": "module",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Sitio de marca personal del Dr. Ulises Torres Aguiñaga. Astro estático + Cloudflare Pages.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "astro build && wrangler pages deploy dist --project-name=mvp-validacion-cardiologia --branch=main --commit-dirty=true"
+  },
+  "dependencies": {
+    "astro": "^7.4.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.112.0"
+  }
+}
