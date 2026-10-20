@@ -5,12 +5,14 @@
    la pantalla. La nav flotante se recoloca por encima (pie.css). */
 import { SOBRE } from '../data/contenido';
 import { CONSULTORIO, CONTACTO } from '../data/sitio';
+import Logo from './Logo.astro';
 
 const anio = new Date().getFullYear();
 ---
 <footer class="pie">
   <div class="pie__fila">
     <p class="pie__identidad">
+      <Logo class="pie__logo" tamano={26} />
       <span class="pie__nombre">{SOBRE.nombre}</span>
       <span class="pie__meta">{CONSULTORIO.calle} · {CONSULTORIO.colonia}, {CONSULTORIO.ciudad}</span>
     </p>

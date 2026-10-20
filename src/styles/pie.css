@@ -63,6 +63,9 @@
   gap:4px clamp(12px,2vw,28px);
 }
 .pie__identidad{margin:0;display:flex;flex-direction:column;line-height:1.35}
+/* El logotipo no se estira ni se encoge con la fila, y se centra contra el
+   bloque de texto en vez de colgar de su línea base. */
+.pie__logo{flex:none;align-self:center}
 .pie__nombre{font-weight:600;font-size:.86rem;color:var(--brand)}
 .pie__meta{font-size:.76rem;color:var(--ink-2)}
 .pie__enlaces{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(10px,2vw,20px)}
@@ -175,5 +178,9 @@
   .pie__enlaces a[href^="mailto"]{display:inline-flex}
   .pie__fila{justify-content:space-between}
   .mapa__lienzo{aspect-ratio:21/9}
-  .pie__identidad{flex-direction:row;align-items:baseline;gap:10px}
+  /* Centrado, no línea base: con baseline el logotipo define el alto de la
+     fila y el texto se alinea arriba, así que la marca cuelga unos píxeles
+     por debajo (y el desfase crece con su tamaño). Centrar cuesta ~1px de
+     deriva entre el nombre y la dirección, que no se percibe. */
+  .pie__identidad{flex-direction:row;align-items:center;gap:10px}
 }

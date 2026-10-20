@@ -1,0 +1,25 @@
+---
+/* Logotipo del Dr. Torres.
+   A diferencia de Icono.astro, esto no se inserta en línea para heredar
+   currentColor: el SVG lleva sus dos colores fijos (#9b1643 y #494769), que
+   son la marca. Va como <img>, que además lo deja en caché aparte del HTML.
+   Por omisión es decorativo. Donde se usa, el nombre ya está escrito al
+   lado, y un lector de pantalla no debería leerlo dos veces. */
+interface Props {
+  /** Lado en px; el trazo es cuadrado (512×512). */
+  tamano?: number;
+  /** Alternativo. Vacío (por omisión) = decorativo. */
+  alt?: string;
+  class?: string;
+}
+
+const { tamano = 24, alt = '', class: clase } = Astro.props;
+---
+<img
+  src="/Logo.svg"
+  alt={alt}
+  width={tamano}
+  height={tamano}
+  class={clase}
+  draggable="false"
+/>
