@@ -45,7 +45,7 @@ export const SERVICIOS = {
     {
       icono: 'corazon',
       titulo: 'Ecocardiograma bidimensional',
-      texto: 'AtEstudio de ultrasonido que obtiene imágenes del corazón en cortes, para valorar su estructura y movimiento. Es la base de la evaluación cardiológica y se usa para revisión inicial o seguimiento.',
+      texto: 'Estudio de ultrasonido que obtiene imágenes del corazón en cortes, para valorar su estructura y movimiento. Es la base de la evaluación cardiológica y se usa para revisión inicial o seguimiento.',
     },
     {
       icono: 'corazon',

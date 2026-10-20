@@ -34,16 +34,21 @@
   html{scroll-behavior:auto}
 }
 
-/* Ajuste fino: credenciales es el panel mas denso; se compacta para caber. */
+/* Ajuste fino de credenciales.
+   Estas reglas se escribieron cuando los valores eran marcadores cortos y
+   cabían cuatro tarjetas en una fila. Con los datos reales —nombres de
+   instituciones de hasta 86 caracteres— cuatro columnas obligan a tres
+   líneas por valor y la sección se amontona. Se quedan en dos columnas:
+   tarjetas de ~480px donde cada valor entra en una o dos líneas. */
 #confianza .rule{margin:var(--sp-4) 0}
-#confianza .grid-2{gap:clamp(12px,1.2vw,18px);margin-top:calc(var(--sp-5) * var(--air))}
-#confianza .cred{padding:calc(clamp(16px,1.7vw,22px) * var(--air))}
-#confianza .cred dl{gap:8px;margin-top:var(--sp-3)}
-#confianza .note{margin-top:var(--sp-4);font-size:.78rem}
-@media (min-width:1200px){
-  /* En pantallas anchas las cuatro credenciales caben en una sola fila. */
-  #confianza .grid-2{grid-template-columns:repeat(4,minmax(0,1fr))}
-}
+#confianza .grid-2{gap:clamp(14px,1.4vw,22px);margin-top:calc(var(--sp-5) * var(--air))}
+#confianza .cred{padding:calc(clamp(18px,1.8vw,24px) * var(--air))}
+/* El hueco entre pares tiene que superar al interlineado del valor; si no,
+   la etiqueta parece pertenecer al valor de arriba y todo se lee como un
+   muro. 16px contra los 23px de interlineado basta para agrupar bien. */
+#confianza .cred dl{gap:16px;margin-top:var(--sp-4)}
+#confianza .cred dd{line-height:1.45}
+#confianza .note{margin-top:var(--sp-5);font-size:.78rem}
 
 /* Pantallas de poca altura (portatiles 720-800px): se compacta el ritmo
    vertical para que cada seccion siga cabiendo en una pantalla. */
