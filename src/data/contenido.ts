@@ -1,5 +1,15 @@
 export type Dato = { termino: string; valor: string; pendiente?: boolean };
 
+/** Fila de la ficha de datos de la portada. Tres formas posibles: texto a
+ *  secas, texto enlazado, o un botón en lugar del texto. */
+export type DatoContacto = {
+  termino: string;
+  valor?: string;
+  enlace?: string;
+  boton?: string;
+  externo?: boolean;
+};
+
 export const HERO = {
   eyebrow: 'Cardiología · Ecocardiografía',
   titulo: 'Diagnóstico cardiológico de alta precisión.',
@@ -19,11 +29,6 @@ export const SOBRE = {
     'Considero que una buena consulta y un buen estudio no consiste únicamente en establecer un diagnóstico, con interés en que cada persona entienda su padecimiento y sea partícipe de su tratamiento, conozca alternativas y el por qué de cada recomendación. ',
     'Mi objetivo principal es ofrecer no solo un estudio, sino una guía para toma de decisiones de forma adecuada, cercana y actualizada, individualizada a cada caso y cada persona.',
   ],
-  retrato: {
-    pendiente: true,
-    leyenda: 'Retrato profesional · imagen de alta resolución pendiente',
-    alt: 'Espacio reservado para el retrato profesional del Dr. Torres',
-  },
 } as const;
 
 export const SERVICIOS = {
@@ -115,11 +120,23 @@ export const CONTACTO_SECCION = {
     texto: 'Ante dolor de pecho intenso, desmayo o dificultad para respirar, acuda de inmediato al servicio de urgencias más cercano o llame al 911.',
   },
   datos: [
-    { termino: 'Consultorio', valor: `${CONSULTORIO.calle} · ${CONSULTORIO.colonia}` },
-    { termino: 'Teléfono / WhatsApp', valor: CONTACTO.telefonoLegible },
+    {
+      termino: 'Consultorio',
+      valor: `${CONSULTORIO.calle} · ${CONSULTORIO.colonia}`,
+      /* Lleva al mapa de la sección Contacto, más abajo en la misma página. */
+      enlace: '#mapa',
+    },
+    {
+      /* Sin número a la vista: el botón abre la conversación directamente,
+         que es lo que la gente va a hacer de todos modos. */
+      termino: 'WhatsApp',
+      boton: 'Escribir por WhatsApp',
+      enlace: enlaceWhatsapp(),
+      externo: true,
+    },
     { termino: 'Horario', valor: HORARIO.texto },
     { termino: 'Primera consulta', valor: 'Traiga estudios previos, electrocardiogramas y la lista de medicamentos que toma.' },
-  ],
+  ] as DatoContacto[],
 } as const;
 
 /* =========================================================================
@@ -137,7 +154,7 @@ export const CONTACTO_SECCION = {
    Los datos del Responsable se leen de sitio.ts para que no haya dos
    verdades sobre la dirección o el correo.
    ========================================================================= */
-import { CONSULTORIO, CONTACTO, AVISO, HORARIO } from './sitio';
+import { CONSULTORIO, AVISO, HORARIO, enlaceWhatsapp } from './sitio';
 
 export const AVISO_PRIVACIDAD = {
   titulo: 'Aviso de privacidad',

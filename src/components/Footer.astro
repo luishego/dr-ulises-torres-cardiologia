@@ -2,9 +2,14 @@
 /* Pie fijo, a todo el ancho.
    El aviso de privacidad ya no vive aquí: se abre en un modal, así que el
    pie puede quedarse compacto y permanecer siempre a la vista sin comerse
-   la pantalla. La nav flotante se recoloca por encima (pie.css). */
+   la pantalla. La nav flotante se recoloca por encima (pie.css).
+
+   Los contactos van etiquetados, no en crudo: una dirección de correo
+   escrita entera ocupa media barra y no dice nada que "Correo" no diga.
+   La dirección postal tampoco está ya aquí; vive en la portada y en el
+   mapa, que es donde se busca. */
 import { SOBRE } from '../data/contenido';
-import { CONSULTORIO, CONTACTO } from '../data/sitio';
+import { AGENCIA, enlaceCorreo, enlaceWhatsapp } from '../data/sitio';
 import Logo from './Logo.astro';
 
 const anio = new Date().getFullYear();
@@ -14,14 +19,16 @@ const anio = new Date().getFullYear();
     <p class="pie__identidad">
       <Logo class="pie__logo" tamano={26} />
       <span class="pie__nombre">{SOBRE.nombre}</span>
-      <span class="pie__meta">{CONSULTORIO.calle} · {CONSULTORIO.colonia}, {CONSULTORIO.ciudad}</span>
     </p>
 
     <p class="pie__enlaces">
-      <a href={`mailto:${CONTACTO.correo}`}>{CONTACTO.correo}</a>
+      <a href={enlaceCorreo()}>Correo</a>
+      <a href={enlaceWhatsapp()} target="_blank" rel="noopener">WhatsApp</a>
       <a href="#aviso-de-privacidad" data-abre-aviso>Aviso de privacidad</a>
     </p>
 
-    <p class="pie__legal">© {anio}</p>
+    <p class="pie__legal">
+      © {anio} · <a class="pie__firma" href={`mailto:${AGENCIA.correo}`}>Sitio por {AGENCIA.nombre}</a>
+    </p>
   </div>
 </footer>

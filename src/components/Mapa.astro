@@ -6,7 +6,7 @@ const consulta = encodeURIComponent(CONSULTORIO.consulta);
 const incrustado = `https://www.google.com/maps?q=${consulta}&output=embed`;
 const comoLlegar = `https://www.google.com/maps/dir/?api=1&destination=${consulta}`;
 ---
-<div class="mapa">
+<div class="mapa" id="mapa">
   <div class="mapa__datos">
     <p class="mapa__direccion">
       <strong>{CONSULTORIO.calle}</strong><br />

@@ -34,7 +34,19 @@ import { enlaceWhatsapp } from '../data/sitio';
       {CONTACTO_SECCION.datos.map((d) => (
         <div>
           <dt>{d.termino}</dt>
-          <dd>{d.valor}</dd>
+          <dd>
+            {d.boton ? (
+              <a
+                class="btn btn--ghost data__boton"
+                href={d.enlace}
+                target={d.externo ? '_blank' : undefined}
+                rel={d.externo ? 'noopener' : undefined}>{d.boton}</a>
+            ) : d.enlace ? (
+              <a class="data__enlace" href={d.enlace}>{d.valor}</a>
+            ) : (
+              d.valor
+            )}
+          </dd>
         </div>
       ))}
     </dl>

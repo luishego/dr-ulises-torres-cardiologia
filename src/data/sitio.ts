@@ -1,11 +1,5 @@
 export const CONTACTO = {
   whatsapp: '525519494848',
-  /** El mismo número que wa.me, pero legible. Se deriva para que no haya
-   *  dos versiones que puedan dejar de coincidir. */
-  get telefonoLegible() {
-    const n = this.whatsapp;
-    return `+${n.slice(0, 2)} ${n.slice(2, 4)} ${n.slice(4, 8)} ${n.slice(8)}`;
-  },
   correo: 'drtorres.cardioeco@gmail.com',
   mensajeWhatsapp: 'Hola Dr. Torres, me gustaría agendar una consulta.',
   asuntoCorreo: 'Solicitud de consulta',
@@ -25,6 +19,13 @@ export const CONSULTORIO = {
   get completa() {
     return [this.calle, this.colonia, this.cp, this.ciudad].filter(Boolean).join(', ');
   },
+} as const;
+
+/** Quién hizo el sitio. Va firmado en el pie para que quien lo vea y
+ *  quiera algo parecido sepa a quién escribir. */
+export const AGENCIA = {
+  nombre: 'Pixel Solutions',
+  correo: 'luis@pixelsolutions.com.mx',
 } as const;
 
 /** Horario de consulta. Los días en inglés son los que exige schema.org;

@@ -248,6 +248,28 @@
   color: var(--ink)
 }
 
+/* El consultorio enlaza al mapa de más abajo. Subrayado sólo al pasar por
+   encima: dentro de una tarjeta de datos, un enlace permanentemente
+   subrayado compite con el dato en vez de acompañarlo. */
+.data__enlace {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-color);
+  padding-bottom: 1px;
+}
+
+.data__enlace:hover {
+  color: var(--accent);
+  border-bottom-color: currentColor;
+}
+
+/* Compacto, para que no compita con el CTA principal de la portada. */
+.data__boton {
+  margin-top: 4px;
+  font-size: .86rem;
+  padding: 9px 16px;
+}
+
 .alert {
   margin-top: var(--sp-4);
   border-radius: var(--r-btn);

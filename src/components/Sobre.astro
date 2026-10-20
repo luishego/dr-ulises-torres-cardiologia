@@ -9,7 +9,10 @@ import { SOBRE } from "../data/contenido";
       <h2 id="t-sobre">{SOBRE.titulo}</h2>
       <div class="rule"></div>
       <figure class="hero__media">
-        <div class="foto" role="img" aria-label={SOBRE.retrato.alt}>
+        {/* El contenedor sólo aporta el marco de cristal. Sin role="img":
+            la foto ya es real y tiene su propio alt, y un role en el padre
+            lo sustituiría por el del contenedor. */}
+        <div class="foto">
           <img
             class="foto"
             src="/img/dr-torres.jpg"
