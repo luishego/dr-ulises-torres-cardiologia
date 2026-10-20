@@ -1,6 +1,10 @@
 ---
 import { META } from '../data/sitio';
 
+/* URL canónica: evita que www y la versión sin www cuenten como páginas
+   distintas ahora que el sitio es indexable. */
+const canonica = new URL(Astro.url.pathname, Astro.site).href;
+
 /* El orden de los estilos importa: cada hoja asume las anteriores.
    tokens → base → layout → componentes → nav → secciones → responsive →
    cristal → táctil. Astro los agrupa en un solo CSS al construir. */
@@ -30,6 +34,17 @@ import AvisoPrivacidad from '../components/AvisoPrivacidad.astro';
   <meta name="description" content={META.descripcion} />
   {!META.indexable && <meta name="robots" content="noindex, nofollow" />}
   <meta name="theme-color" content="#F1EDEE" />
+  <link rel="canonical" href={canonica} />
+
+  {/* Al abrirse a buscadores, el sitio también empieza a compartirse por
+      WhatsApp, que es el canal de contacto. Sin esto el enlace se pega
+      pelado. */}
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_MX" />
+  <meta property="og:title" content={META.titulo} />
+  <meta property="og:description" content={META.descripcion} />
+  <meta property="og:url" content={canonica} />
+  <meta name="twitter:card" content="summary" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

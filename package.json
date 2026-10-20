@@ -13,6 +13,7 @@
     "deploy": "astro build && wrangler pages deploy dist --project-name=mvp-validacion-cardiologia --branch=main --commit-dirty=true"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.4.0"
   },
   "devDependencies": {

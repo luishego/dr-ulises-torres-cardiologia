@@ -1,3 +1,4 @@
-# MVP de validación, no es un sitio público.
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://www.drulisestorres.com/sitemap-index.xml

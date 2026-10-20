@@ -4,8 +4,7 @@ export const FONDO: 'atardecer' | 'tejido' | 'ambos' = 'atardecer';
 export const MEZCLA_TEJIDO = 0.55;
 
 export const CONTACTO = {
-  // PENDIENTE: lada de país + número, sin espacios ni signos.
-  whatsapp: '520000000000',
+  whatsapp: '525519494848',
   correo: 'drtorres.cardioeco@gmail.com',
   mensajeWhatsapp: 'Hola Dr. Torres, me gustaría agendar una consulta.',
   asuntoCorreo: 'Solicitud de consulta',
@@ -18,10 +17,7 @@ export const CONSULTORIO = {
   calle: 'Tuxpan 54, interior 702',
   colonia: 'Col. Roma Sur',
   ciudad: 'Ciudad de México',
-  // PENDIENTE: código postal, para el domicilio fiscal del aviso.
-  cp: '',
-  /** Lo que se le pasa al mapa. Mientras no haya CP se busca por calle y
-   *  colonia, que en Roma Sur basta para ubicar el edificio. */
+  cp: '06760',
   get consulta() {
     return [this.calle, this.colonia, this.cp, this.ciudad].filter(Boolean).join(', ');
   },
@@ -43,7 +39,7 @@ export const META = {
   titulo: 'Dr. Ulises Torres Aguiñaga — Medicina Interna, Cardiología y Ecocardiografía',
   descripcion:
     'Dr. Ulises Torres Aguiñaga. Medicina interna, cardiología y ecocardiografía.',
-  indexable: false,
+  indexable: true,
 } as const;
 
 export const enlaceWhatsapp = () =>
