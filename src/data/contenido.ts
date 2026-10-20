@@ -13,16 +13,11 @@ export const SOBRE = {
   titulo: '',
   nombre: 'Dr. Ulises Torres Aguiñaga',
   especialidades: 'Medicina Interna · Cardiología · Ecocardiografía',
-  datos: [
-    { sigla: 'UNAM', texto: 'Formación de licenciatura y especialidad' },
-    { sigla: '00', siglaPendiente: true, texto: 'Años de práctica clínica', textoPendiente: 'pendiente de confirmar' },
-    { sigla: 'ETE', texto: 'Ecocardiografía transesofágica realizada por el propio médico tratante' },
-  ],
   parrafos: [
-    'Mi trayectoria comenzó en la medicina interna, la especialidad que obliga a entender al paciente de manera integral antes de aislar un órgano.',
-    'Esa perspectiva clínica es la que aplico en cada procedimiento: sé exactamente qué buscar y cómo correlacionar los hallazgos ecocardiográficos con el estado general del cuerpo.',
-    'La ecocardiografía transesofágica me permite ver estructuras que un ecocardiograma convencional no alcanza, ofreciendo un diagnóstico certero.',
-    'Al concluir el procedimiento, puedo determinar cuál es el hallazgo anatómico exacto, qué conducta clínica sugiere la evidencia y el reporte detallado listo para guiar el tratamiento',
+    'Médico Internista y Cardiólogo, con formación especializada en Ecocardiografía de adultos, con dedicación al diagnóstico integral y al tratamiento de enfermedades cardiovasculares y metabólicas.',
+    'La práctica se centra en brindar una atención basada en evidencia científica, utilizando herramientas diagnósticas de alta precisión para ofrecer un tratamiento personalizado a cada persona.',
+    'Considero que una buena consulta y un buen estudio no consiste únicamente en establecer un diagnóstico, con interés en que cada persona entienda su padecimiento y sea partícipe de su tratamiento, conozca alternativas y el por qué de cada recomendación. ',
+    'Mi objetivo principal es ofrecer no solo un estudio, sino una guía para toma de decisiones de forma adecuada, cercana y actualizada, individualizada a cada caso y cada persona.',
   ],
   retrato: {
     pendiente: true,
@@ -79,9 +74,9 @@ export const CONFIANZA = {
       icono: 'credencial',
       titulo: 'Cédulas profesionales',
       datos: [
-        { termino: 'Cédula general', valor: 'pendiente de documentación', pendiente: true },
-        { termino: 'Cédula de especialidad', valor: 'pendiente de documentación', pendiente: true },
-        { termino: 'Cédula de subespecialidad', valor: 'pendiente de documentación', pendiente: true },
+        { termino: 'Cédula general', valor: '10985964' },
+        { termino: 'Cédula de especialidad', valor: '13241376' },
+        { termino: 'Cédula de subespecialidad', valor: '15116917' },
       ] as Dato[],
     },
     {
