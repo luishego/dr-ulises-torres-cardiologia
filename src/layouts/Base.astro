@@ -4,6 +4,7 @@ import { META } from '../data/sitio';
 /* URL canónica: evita que www y la versión sin www cuenten como páginas
    distintas ahora que el sitio es indexable. */
 const canonica = new URL(Astro.url.pathname, Astro.site).href;
+const imagenOg = new URL(META.imagen, Astro.site).href;
 
 /* El orden de los estilos importa: cada hoja asume las anteriores.
    tokens → base → layout → componentes → nav → secciones → responsive →
@@ -41,7 +42,16 @@ import AvisoPrivacidad from '../components/AvisoPrivacidad.astro';
   <meta property="og:title" content={META.titulo} />
   <meta property="og:description" content={META.descripcion} />
   <meta property="og:url" content={canonica} />
-  <meta name="twitter:card" content="summary" />
+  {/* Absoluta a la fuerza: WhatsApp y Facebook descartan una ruta relativa
+      en og:image y el enlace se pega sin vista previa. */}
+  <meta property="og:image" content={imagenOg} />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content={String(META.imagenAncho)} />
+  <meta property="og:image:height" content={String(META.imagenAlto)} />
+  <meta property="og:image:alt" content={META.imagenAlt} />
+  {/* La imagen es 1.91:1, así que la tarjeta ancha; con "summary" el logo
+      se recortaría a un cuadrado. */}
+  <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

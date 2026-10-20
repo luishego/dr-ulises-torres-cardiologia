@@ -35,6 +35,12 @@ export const META = {
   descripcion:
     'Dr. Ulises Torres Aguiñaga. Medicina interna, cardiología y ecocardiografía.',
   indexable: true,
+  /** Vista previa al compartir el enlace. Ruta relativa: Base.astro la
+   *  vuelve absoluta contra `site`, que es lo que exige Open Graph. */
+  imagen: '/img/og-dr-ulises-torres.png',
+  imagenAncho: 1200,
+  imagenAlto: 630,
+  imagenAlt: 'Logotipo del Dr. Ulises Torres Aguiñaga',
 } as const;
 
 export const enlaceWhatsapp = () =>
