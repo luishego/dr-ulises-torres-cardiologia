@@ -91,8 +91,9 @@ export const CONFIANZA = {
     {
       icono: 'medalla',
       titulo: 'Certificación de consejo',
-      /* ⚠ Los dos folios son idénticos. Puede ser que el Consejo emita un
-         solo certificado para ambas, pero está sin confirmar. */
+      /* Los dos folios son idénticos a propósito y están confirmados: el
+         Consejo ampara ambas certificaciones con un mismo número. No es un
+         copy-paste, no hay que "corregirlo". */
       datos: [
         { termino: 'Consejo', valor: 'Consejo Mexicano de Cardiología' },
         { termino: 'Cardiología clínica', valor: 'CMC2025-5612' },
