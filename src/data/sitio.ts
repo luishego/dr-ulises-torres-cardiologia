@@ -1,8 +1,3 @@
-export const FONDO: 'atardecer' | 'tejido' | 'ambos' = 'atardecer';
-
-/** Cuánto pesa el tejido sobre el atardecer cuando FONDO es 'ambos'. */
-export const MEZCLA_TEJIDO = 0.55;
-
 export const CONTACTO = {
   whatsapp: '525519494848',
   correo: 'drtorres.cardioeco@gmail.com',

@@ -7,7 +7,12 @@
    dos más el aire entre ellos. Se declara aquí para que --nav-safe no
    quede descuadrado si alguno cambia de tamaño. */
 :root{
-  --pie-alto:64px;
+  /* Medido, no estimado. En móvil son dos filas:
+     1px de borde + 10 de relleno + 26 (logotipo) + 6 de hueco entre filas
+     + 44 (área táctil del aviso) + 10 de relleno = 97.
+     Si cambia cualquiera de esos números hay que rehacer la suma, o la nav
+     flotante se monta encima del pie. */
+  --pie-alto:97px;
   --nav-hueco:12px;
 }
 
@@ -62,12 +67,26 @@
   justify-content:space-between;
   gap:4px clamp(12px,2vw,28px);
 }
-.pie__identidad{margin:0;display:flex;flex-direction:column;line-height:1.35}
+/* En móvil la identidad ocupa su propia fila: a 360px el nombre completo y
+   el aviso de privacidad no caben en una sola, y partir el nombre del
+   médico en dos líneas o recortarlo con puntos suspensivos no es opción. */
+.pie__identidad{
+  margin:0;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  gap:8px;
+  flex-basis:100%;
+  justify-content:center;
+  line-height:1.35;
+}
 /* El logotipo no se estira ni se encoge con la fila, y se centra contra el
    bloque de texto en vez de colgar de su línea base. */
 .pie__logo{flex:none;align-self:center}
 .pie__nombre{font-weight:600;font-size:.86rem;color:var(--brand)}
-.pie__meta{font-size:.76rem;color:var(--ink-2)}
+/* La dirección sí se queda fuera del teléfono: ya está en Contacto y en el
+   mapa, y aquí costaría una tercera fila. */
+.pie__meta{display:none;font-size:.76rem;color:var(--ink-2)}
 .pie__enlaces{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(10px,2vw,20px)}
 .pie__enlaces a{
   color:var(--accent);
@@ -80,12 +99,12 @@
 }
 .pie__legal{margin:0;font-size:.74rem;color:var(--ink-2)}
 
-/* En móvil la barra se queda con lo imprescindible. La dirección y el correo
-   ya están en Contacto y en el mapa; repetirlos en una barra fija de un
-   teléfono cuesta un tercio de la pantalla y no aporta nada. */
-.pie__identidad{display:none}
+/* En móvil la barra se queda con lo imprescindible: marca, nombre y aviso.
+   El correo no, que ya está en Contacto y abre una app distinta.
+   El hueco entre filas va aparte del hueco entre columnas: con var(--sp-4)
+   en ambos ejes la barra crecía de más. */
 .pie__enlaces a[href^=mailto]{display:none}
-.pie__fila{justify-content:center;gap:var(--sp-4)}
+.pie__fila{justify-content:center;gap:6px var(--sp-4)}
 
 /* La nav flotante se sube por encima del pie. */
 .nav{bottom:calc(var(--pie-alto) + var(--nav-hueco) + env(safe-area-inset-bottom, 0px))}
@@ -174,13 +193,14 @@
   /* Con ratón no hacen falta 44px de área táctil, así que la barra adelgaza. */
   :root{--pie-alto:54px}
   .pie__enlaces a{min-height:32px}
-  .pie__identidad{display:flex}
   .pie__enlaces a[href^="mailto"]{display:inline-flex}
   .pie__fila{justify-content:space-between}
   .mapa__lienzo{aspect-ratio:21/9}
-  /* Centrado, no línea base: con baseline el logotipo define el alto de la
-     fila y el texto se alinea arriba, así que la marca cuelga unos píxeles
-     por debajo (y el desfase crece con su tamaño). Centrar cuesta ~1px de
-     deriva entre el nombre y la dirección, que no se percibe. */
-  .pie__identidad{flex-direction:row;align-items:center;gap:10px}
+  /* Con sitio de sobra todo vuelve a una sola fila, y reaparece la
+     dirección. Centrado, no línea base: con baseline el logotipo define el
+     alto de la fila y el texto se alinea arriba, así que la marca cuelga
+     unos píxeles por debajo (y el desfase crece con su tamaño). Centrar
+     cuesta ~1px de deriva entre el nombre y la dirección, imperceptible. */
+  .pie__identidad{flex-basis:auto;justify-content:flex-start;gap:10px}
+  .pie__meta{display:inline}
 }
