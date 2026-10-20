@@ -2,7 +2,10 @@
 # El proyecto en Cloudflare es un Worker (no un proyecto de Pages), así que el
 # comando correcto es `wrangler deploy`, nunca `wrangler pages deploy`.
 name = "dr-ulises-torres-cardiologia"
-compatibility_date = "2026-10-20"
+# Un día por detrás de hoy a propósito: con la fecha de hoy el runtime que
+# trae wrangler todavía no la soporta y `wrangler dev` no arranca, aunque en
+# la nube funcione.
+compatibility_date = "2026-10-19"
 
 [assets]
 directory = "./dist"
