@@ -114,19 +114,19 @@ Cloudflare **Workers** (no Pages), Worker `dr-ulises-torres-cardiologia` en la c
 como assets estáticos del Worker, según `wrangler.toml`; `_headers`, `robots.txt` y las
 imágenes salen de `public/`.
 
-Publicar a mano, desde este directorio:
+**El ciclo arranca en GitHub.** El Worker está conectado al repo vía Workers Builds, así que
+un `push` a `main` basta: GitHub levanta un check `Workers Builds: dr-ulises-torres-cardiologia`,
+corre `npm run build` y publica una versión nueva. Verificado el 20 oct 2026 con el commit
+`5814ac3`. No hay que tocar nada a mano.
+
+Para publicar sin pasar por GitHub —sólo si el pipeline está caído— desde este directorio:
 
 ```bash
 npm run deploy
 ```
 
-Ojo con dos confusiones fáciles:
-
-- **No es un proyecto de Pages.** `wrangler pages deploy` falla con «Project not found» y
-  `wrangler pages project list` sale vacío. El comando correcto es `wrangler deploy`.
-- **No hay build automático todavía.** El repo en GitHub no está conectado a Workers Builds,
-  así que un `git push` no publica nada: todas las versiones del Worker tienen origen
-  «Upload». Mientras no se conecte, cada cambio necesita un `npm run deploy` explícito.
+Ojo con una confusión fácil: **no es un proyecto de Pages.** `wrangler pages deploy` falla con
+«Project not found» y `wrangler pages project list` sale vacío. El comando es `wrangler deploy`.
 
 | | Estado |
 |---|---|
