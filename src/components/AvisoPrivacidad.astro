@@ -1,0 +1,50 @@
+---
+/* Aviso de privacidad en modal.
+   Se usa <dialog> nativo: trae por sí solo el foco atrapado, el cierre con
+   Esc y el fondo inerte, cosas que a mano casi nunca quedan bien.
+   Sin JavaScript el <dialog> no abriría, así que el disparador es un enlace
+   a #aviso-de-privacidad y una regla :target lo muestra igualmente. */
+import { AVISO_PRIVACIDAD as A } from '../data/contenido';
+import { AVISO } from '../data/sitio';
+---
+<dialog class="modal" id="aviso-de-privacidad" aria-labelledby="titulo-aviso">
+  <article class="modal__caja">
+    <header class="modal__cabecera">
+      <h2 id="titulo-aviso">{A.titulo}</h2>
+      <button class="modal__cerrar" type="button" data-cerrar aria-label="Cerrar el aviso de privacidad">×</button>
+    </header>
+
+    <div class="modal__cuerpo">
+      {A.secciones.map((s) => (
+        <section>
+          <h3>{s.titulo}</h3>
+          {s.parrafos.map((p) => <p>{p}</p>)}
+          {'lista' in s && s.lista && <ul>{s.lista.map((li) => <li>{li}</li>)}</ul>}
+        </section>
+      ))}
+      <p class="modal__cierre">{A.cierre}</p>
+      <p class="modal__fecha">Última actualización: {AVISO.actualizado}</p>
+    </div>
+
+    <footer class="modal__pie">
+      <button class="btn btn--primary" type="button" data-cerrar>Entendido</button>
+    </footer>
+  </article>
+</dialog>
+
+<script>
+  const modal = document.getElementById('aviso-de-privacidad') as HTMLDialogElement | null;
+  if (modal) {
+    document.querySelectorAll<HTMLElement>('[data-abre-aviso]').forEach((b) =>
+      b.addEventListener('click', (e) => { e.preventDefault(); modal.showModal(); })
+    );
+    modal.querySelectorAll<HTMLElement>('[data-cerrar]').forEach((b) =>
+      b.addEventListener('click', () => modal.close())
+    );
+    /* Clic fuera de la caja: el <dialog> ocupa toda la pantalla, así que un
+       clic en él que no caiga dentro del artículo es un clic en el fondo. */
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.close();
+    });
+  }
+</script>

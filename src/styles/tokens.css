@@ -12,7 +12,9 @@
   --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px;
   --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px;
 
-  --nav-safe:calc(clamp(96px,13vh,124px) + env(safe-area-inset-bottom, 0px));
+  /* El contenido debe librar la nav flotante Y el pie fijo que hay debajo.
+     --pie-alto y --nav-hueco se definen en pie.css. */
+  --nav-safe:calc(clamp(96px,13vh,124px) + var(--pie-alto,76px) + env(safe-area-inset-bottom, 0px));
   --dur:.2s;
   --ease:cubic-bezier(.2,.7,.3,1);
 

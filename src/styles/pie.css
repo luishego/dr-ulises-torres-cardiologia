@@ -1,6 +1,15 @@
 /* =========================================================================
-   12. MAPA Y PIE DE PÁGINA
+   12. MAPA, PIE FIJO Y MODAL DEL AVISO
    ========================================================================= */
+
+/* Alturas reservadas abajo. El pie es fijo y la nav flota por encima de él,
+   así que el espacio que debe dejar libre el contenido es la suma de los
+   dos más el aire entre ellos. Se declara aquí para que --nav-safe no
+   quede descuadrado si alguno cambia de tamaño. */
+:root{
+  --pie-alto:64px;
+  --nav-hueco:12px;
+}
 
 /* ---- Mapa del consultorio ---- */
 .mapa{
@@ -16,133 +25,155 @@
   justify-content:space-between;
   gap:var(--sp-3);
 }
-.mapa__direccion{
-  margin:0;
-  color:var(--ink-2);
-  font-size:.95rem;
-  line-height:1.5;
-}
+.mapa__direccion{margin:0;color:var(--ink-2);font-size:.95rem;line-height:1.5}
 .mapa__direccion strong{color:var(--brand)}
 .mapa__lienzo{
   border-radius:var(--r-card);
   overflow:hidden;
   box-shadow:var(--shadow);
   border:1px solid var(--glass-border,transparent);
-  /* Más alto que ancho en móvil, apaisado en pantallas grandes: un mapa
-     cuadrado en el teléfono deja demasiada calle y poco edificio. */
   aspect-ratio:4/3;
 }
 .mapa__lienzo iframe{
-  display:block;
-  width:100%;
-  height:100%;
-  border:0;
-  /* El mapa de Google llega muy saturado para este fondo; se atempera sin
-     llegar a volverlo ilegible. */
+  display:block;width:100%;height:100%;border:0;
   filter:saturate(.85) contrast(1.02);
 }
 
-/* ---- Pie de página ---- */
+/* ---- Pie fijo, a todo el ancho ---- */
 .pie{
-  position:relative;
-  z-index:1;
-  padding:clamp(40px,6vw,64px) 20px calc(var(--nav-safe) + 8px);
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:50;
+  padding:10px clamp(16px,3vw,32px) calc(10px + env(safe-area-inset-bottom, 0px));
+  background:rgba(255,255,255,.86);
+  border-top:1px solid var(--glass-border,rgba(255,255,255,.6));
+  -webkit-backdrop-filter:var(--glass,blur(14px) saturate(180%));
+  backdrop-filter:var(--glass,blur(14px) saturate(180%));
+  box-shadow:0 -2px 16px rgba(73,71,105,.10);
 }
-.pie__inner{
+.pie__fila{
   width:min(var(--inner-max,1140px),100%);
   margin-inline:auto;
-  padding:var(--inner-pad,24px);
-  border-radius:var(--inner-radius,24px);
-  background:var(--inner-bg,rgba(255,255,255,.78));
-  border:1px solid var(--inner-border,transparent);
-  box-shadow:var(--inner-shadow,none);
-  -webkit-backdrop-filter:var(--inner-blur,none);
-  backdrop-filter:var(--inner-blur,none);
-  display:grid;
-  gap:var(--sp-5);
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:4px clamp(12px,2vw,28px);
 }
-.pie__nombre{
-  margin:0;
-  font-family:var(--font-display);
-  font-weight:500;
-  font-size:1.05rem;
-  color:var(--brand);
-  letter-spacing:-.01em;
-}
-.pie__meta{margin:4px 0 0;color:var(--ink-2);font-size:.88rem;line-height:1.55}
-/* El correo es un enlace de una línea: sin esto queda en 17px de alto y
-   es incómodo de tocar en el teléfono. */
-.pie__meta a{
+.pie__identidad{margin:0;display:flex;flex-direction:column;line-height:1.35}
+.pie__nombre{font-weight:600;font-size:.86rem;color:var(--brand)}
+.pie__meta{font-size:.76rem;color:var(--ink-2)}
+.pie__enlaces{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:clamp(10px,2vw,20px)}
+.pie__enlaces a{
   color:var(--accent);
-  display:inline-block;
+  font-size:.78rem;
+  /* Área táctil cómoda sin engordar la barra: el alto extra se reparte
+     con padding, no con line-height. */
+  display:inline-flex;
+  align-items:center;
   min-height:44px;
-  line-height:44px;
 }
-.pie__legal{margin:0;color:var(--ink-2);font-size:.78rem}
+.pie__legal{margin:0;font-size:.74rem;color:var(--ink-2)}
 
-/* ---- Aviso de privacidad plegable ---- */
-.aviso{
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  padding:var(--sp-3) 0;
+/* En móvil la barra se queda con lo imprescindible. La dirección y el correo
+   ya están en Contacto y en el mapa; repetirlos en una barra fija de un
+   teléfono cuesta un tercio de la pantalla y no aporta nada. */
+.pie__identidad{display:none}
+.pie__enlaces a[href^=mailto]{display:none}
+.pie__fila{justify-content:center;gap:var(--sp-4)}
+
+/* La nav flotante se sube por encima del pie. */
+.nav{bottom:calc(var(--pie-alto) + var(--nav-hueco) + env(safe-area-inset-bottom, 0px))}
+
+/* ---- Modal del aviso ---- */
+.modal{
+  border:0;
+  padding:0;
+  background:transparent;
+  max-width:min(760px,calc(100vw - 32px));
+  width:100%;
+  max-height:min(86vh,860px);
+  margin:auto;
+  overflow:visible;
+  color:var(--ink);
 }
-.aviso summary{
-  cursor:pointer;
-  list-style:none;
+.modal::backdrop{
+  background:rgba(35,34,56,.55);
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
+}
+.modal__caja{
+  display:flex;
+  flex-direction:column;
+  max-height:min(86vh,860px);
+  /* Texto legal largo: aquí manda la legibilidad sobre la transparencia. */
+  background:rgba(255,255,255,.96);
+  border:1px solid var(--glass-border,rgba(255,255,255,.7));
+  border-radius:var(--r-card);
+  box-shadow:0 30px 80px rgba(35,34,56,.35);
+  -webkit-backdrop-filter:blur(20px) saturate(160%);
+  backdrop-filter:blur(20px) saturate(160%);
+  overflow:hidden;
+}
+.modal__cabecera{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:var(--sp-3);
-  min-height:44px;
-  font:600 .92rem/1.3 var(--font-body);
-  color:var(--brand);
+  padding:var(--sp-4) var(--sp-5);
+  border-bottom:1px solid var(--line);
 }
-.aviso summary::-webkit-details-marker{display:none}
-.aviso summary::after{
-  content:"+";
-  font-size:1.3rem;
-  line-height:1;
-  color:var(--accent);
-  flex:none;
+.modal__cabecera h2{margin:0;font-size:1.15rem;color:var(--brand);letter-spacing:-.01em}
+.modal__cerrar{
+  appearance:none;border:0;background:transparent;cursor:pointer;
+  width:44px;height:44px;border-radius:50%;
+  font-size:1.6rem;line-height:1;color:var(--ink-2);
+  display:grid;place-items:center;flex:none;
 }
-.aviso[open] summary::after{content:"−"}
-.aviso__cuerpo{
-  margin-top:var(--sp-4);
-  /* Medida de lectura: un texto legal a todo el ancho del pie es ilegible. */
-  max-width:72ch;
+.modal__cerrar:hover{color:var(--accent);background:rgba(155,22,67,.08)}
+.modal__cuerpo{
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding:var(--sp-5);
+  -webkit-overflow-scrolling:touch;
 }
-.aviso__cuerpo h3{
+.modal__cuerpo h3{
   margin:var(--sp-5) 0 var(--sp-2);
-  font-size:.92rem;
-  font-weight:600;
-  color:var(--brand);
-  letter-spacing:0;
+  font-size:.92rem;font-weight:600;color:var(--brand);letter-spacing:0;
 }
-.aviso__cuerpo section:first-child h3{margin-top:0}
-.aviso__cuerpo p{margin:0 0 var(--sp-3);color:var(--ink-2);font-size:.85rem;line-height:1.6}
-.aviso__cuerpo ul{margin:0 0 var(--sp-3);padding:0;list-style:none;display:grid;gap:6px}
-.aviso__cuerpo li{
-  position:relative;
-  padding-left:18px;
-  color:var(--ink-2);
-  font-size:.85rem;
-  line-height:1.5;
+.modal__cuerpo section:first-child h3{margin-top:0}
+.modal__cuerpo p{margin:0 0 var(--sp-3);color:var(--ink-2);font-size:.88rem;line-height:1.65}
+.modal__cuerpo ul{margin:0 0 var(--sp-3);padding:0;list-style:none;display:grid;gap:7px}
+.modal__cuerpo li{
+  position:relative;padding-left:18px;
+  color:var(--ink-2);font-size:.88rem;line-height:1.5;
 }
-.aviso__cuerpo li::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:.55em;
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:var(--accent);
-  opacity:.7;
+.modal__cuerpo li::before{
+  content:"";position:absolute;left:0;top:.55em;
+  width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.7;
 }
-.aviso__cierre{font-style:italic}
-.aviso__fecha{font-size:.78rem !important;opacity:.8}
+.modal__cierre{font-style:italic}
+.modal__fecha{font-size:.78rem !important;opacity:.8}
+.modal__pie{
+  padding:var(--sp-4) var(--sp-5);
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:flex-end;
+}
+
+/* Sin JavaScript el <dialog> nunca recibe showModal(); el ancla sigue
+   funcionando y esta regla lo muestra como bloque centrado. */
+.modal:target{display:block}
 
 @media (min-width:768px){
+  /* Con ratón no hacen falta 44px de área táctil, así que la barra adelgaza. */
+  :root{--pie-alto:54px}
+  .pie__enlaces a{min-height:32px}
+  .pie__identidad{display:flex}
+  .pie__enlaces a[href^="mailto"]{display:inline-flex}
+  .pie__fila{justify-content:space-between}
   .mapa__lienzo{aspect-ratio:21/9}
-  .pie__inner{gap:var(--sp-6)}
+  .pie__identidad{flex-direction:row;align-items:baseline;gap:10px}
 }
