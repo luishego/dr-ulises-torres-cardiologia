@@ -1,7 +1,7 @@
 # Sitio — Dr. Ulises Torres Aguiñaga
 
-**En línea:** https://mvp-validacion-cardiologia.pages.dev
-**Dirección:** Cristal · obra a sangre completa detrás de paneles de vidrio con refracción.
+**En línea:** https://www.drulisestorres.com
+**Dirección visual:** Cristal · obra a sangre completa detrás de paneles de vidrio con refracción.
 
 Proyecto **Astro** estático. Una sola página, sin SSR ni adaptador: el build produce `dist/`
 y ese directorio se sube tal cual a Cloudflare Pages.
@@ -72,10 +72,21 @@ export const FONDO: 'atardecer' | 'tejido' | 'ambos' = 'ambos';
 Los pendientes se pintan en cursiva con subrayado punteado, **a propósito**: en un sitio que
 enseña credenciales médicas, un dato inventado que parezca real es peor que un hueco visible.
 
-## Copy
+## Contenido
 
-El texto lo redactó la agencia para la sesión de validación y **no está aprobado por el
-Dr. Torres**. Revisar con él antes de considerarlo definitivo.
+El copy de las cinco secciones y las credenciales están **validados por el Dr. Torres**. Todo
+vive en `src/data/contenido.ts`; la configuración —fondo, contacto, dirección del consultorio
+y datos del Responsable del aviso— en `src/data/sitio.ts`.
+
+## Aviso de privacidad
+
+Va plegado en el pie, dentro de un `<details>`. El texto se adaptó de un aviso de otra consulta
+médica: se cambió el Responsable, su domicilio y el correo para derechos ARCO, y se retiraron
+las cláusulas de recabado de datos de menores, que no aplican a una práctica de ecocardiografía
+de adultos.
+
+> **Pendiente de revisión legal.** Falta el código postal del domicilio (`CONSULTORIO.cp`) y que
+> un abogado o el propio Dr. Torres valide el alcance antes de darlo por bueno.
 
 ## Verificado en navegador
 
@@ -95,13 +106,13 @@ Build servido por HTTP, con emulación de dispositivo, a 320, 375, 768, 1000 y 1
 
 Safari en iOS no se puede probar desde aquí: quedan las zonas seguras del notch y si el
 `backdrop-filter` parpadea al desplazarse, un defecto conocido de WebKit con capas fijas.
-
 ## Despliegue
 
-Proyecto `mvp-validacion-cardiologia` en la cuenta `adminsolcre@gmail.com`. `npm run deploy`
-construye y sube `dist/`. El `_headers` y el `robots.txt` viajan desde `public/`.
+Cloudflare Workers, proyecto `dr-ulises-torres-cardiologia` en la cuenta
+`adminsolcre@gmail.com`, con dominio propio en **www.drulisestorres.com**. El despliegue se
+dispara desde GitHub; `_headers` y `robots.txt` viajan desde `public/`.
 
 | | Estado |
 |---|---|
-| Indexación | Bloqueada: `<meta robots>` (vía `META.indexable`), `robots.txt` y `X-Robots-Tag` |
-| Acceso con contraseña | **No hay.** Cualquiera con el enlace entra |
+| Indexación | **Bloqueada** por `<meta robots>` (vía `META.indexable`), `robots.txt` y `X-Robots-Tag`. Quitarlo cuando el aviso de privacidad tenga visto bueno legal |
+| Repositorio | Público. Lleva las cédulas reales del Dr. Torres, que de todos modos son registro público en la SEP |

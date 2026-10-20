@@ -1,0 +1,29 @@
+---
+/* Mapa del consultorio.
+   Se carga en diferido y por debajo del contenido útil: la dirección va
+   también como texto y con enlace a Google Maps, así que si el iframe se
+   bloquea —extensión de privacidad, red corporativa— el paciente sigue
+   pudiendo llegar. */
+import { CONSULTORIO } from '../data/sitio';
+
+const consulta = encodeURIComponent(CONSULTORIO.consulta);
+const incrustado = `https://www.google.com/maps?q=${consulta}&output=embed`;
+const comoLlegar = `https://www.google.com/maps/dir/?api=1&destination=${consulta}`;
+---
+<div class="mapa">
+  <div class="mapa__datos">
+    <p class="mapa__direccion">
+      <strong>{CONSULTORIO.calle}</strong><br />
+      {CONSULTORIO.colonia} · {CONSULTORIO.ciudad}
+    </p>
+    <a class="btn btn--ghost" href={comoLlegar} target="_blank" rel="noopener">Cómo llegar</a>
+  </div>
+  <div class="mapa__lienzo">
+    <iframe
+      src={incrustado}
+      title={`Mapa del consultorio en ${CONSULTORIO.completa}`}
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen></iframe>
+  </div>
+</div>

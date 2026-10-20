@@ -1,6 +1,7 @@
 ---
 import { CONTACTO_SECCION as C } from '../data/contenido';
 import { enlaceWhatsapp, enlaceCorreo } from '../data/sitio';
+import Mapa from './Mapa.astro';
 ---
 <section class="panel" id="contacto" aria-labelledby="t-contacto">
   <div class="panel__inner contact">
@@ -23,15 +24,6 @@ import { enlaceWhatsapp, enlaceCorreo } from '../data/sitio';
       </div>
     </div>
 
-    <!-- <dl class="data">
-      {C.datos.map((d) => (
-        <div>
-          <dt>{d.termino}</dt>
-          <dd class={'pendiente' in d && d.pendiente ? 'ph' : undefined}>
-            {d.valor}{'cola' in d && d.cola && <> — <span class="ph">{d.cola}</span></>}
-          </dd>
-        </div>
-      ))}
-    </dl> -->
+    <Mapa />
   </div>
 </section>

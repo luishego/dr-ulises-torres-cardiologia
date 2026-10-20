@@ -3,7 +3,11 @@
    La base es una columna. Cada media query AÑADE columnas al subir de
    tamaño; ninguna las quita. Así el teléfono no ejecuta ningún override.
    ========================================================================= */
-.hero,.split,.contact{grid-template-columns:1fr;gap:clamp(24px,3vw,40px)}
+/* .contact ya no es grid: se maqueta con flex en columna (secciones.css).
+   .hero tampoco aplica: el Hero dejó de llevar esa clase al quitarse el
+   retrato de la portada. Solo .split sigue en uso, en Sobre. */
+.split{grid-template-columns:1fr;gap:clamp(24px,3vw,40px)}
+.contact{gap:clamp(24px,3vw,40px)}
 .grid-3,.grid-2{grid-template-columns:1fr}
 .hero__media{max-width:none}
 .cta-row .btn{flex:1 1 100%}
@@ -22,9 +26,7 @@
    El corte va en 1000px y no en 1025 para que un portátil o iPad de 1024
    reciba el layout de dos columnas: apilado a esa altura no cabía nada. */
 @media (min-width:1000px){
-  .hero{grid-template-columns:minmax(0,1.05fr) minmax(0,.85fr)}
   .split{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
-  .contact{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}
   .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
   .hero__media{max-width:420px}
 }

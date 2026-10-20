@@ -6,10 +6,37 @@ export const MEZCLA_TEJIDO = 0.55;
 export const CONTACTO = {
   // PENDIENTE: lada de país + número, sin espacios ni signos.
   whatsapp: '520000000000',
-  // PENDIENTE
-  correo: 'contacto@ejemplo.mx',
+  correo: 'drtorres.cardioeco@gmail.com',
   mensajeWhatsapp: 'Hola Dr. Torres, me gustaría agendar una consulta.',
   asuntoCorreo: 'Solicitud de consulta',
+} as const;
+
+/** Consultorio. La dirección alimenta a la vez la ficha de contacto, el
+ *  mapa y el domicilio del Responsable en el aviso de privacidad, así que
+ *  se escribe una sola vez aquí. */
+export const CONSULTORIO = {
+  calle: 'Tuxpan 54, interior 702',
+  colonia: 'Col. Roma Sur',
+  ciudad: 'Ciudad de México',
+  // PENDIENTE: código postal, para el domicilio fiscal del aviso.
+  cp: '',
+  /** Lo que se le pasa al mapa. Mientras no haya CP se busca por calle y
+   *  colonia, que en Roma Sur basta para ubicar el edificio. */
+  get consulta() {
+    return [this.calle, this.colonia, this.cp, this.ciudad].filter(Boolean).join(', ');
+  },
+  get completa() {
+    return [this.calle, this.colonia, this.cp, this.ciudad].filter(Boolean).join(', ');
+  },
+} as const;
+
+/** Datos del Responsable para la Ley Federal de Protección de Datos
+ *  Personales en Posesión de los Particulares. */
+export const AVISO = {
+  responsable: 'Dr. Ulises Torres Aguiñaga',
+  correoArco: 'drtorres.cardioeco@gmail.com',
+  /** Última revisión del texto legal. Actualizar al modificarlo. */
+  actualizado: '2026-10-20',
 } as const;
 
 export const META = {

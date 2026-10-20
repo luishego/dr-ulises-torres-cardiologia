@@ -1,0 +1,148 @@
+/* =========================================================================
+   12. MAPA Y PIE DE PÁGINA
+   ========================================================================= */
+
+/* ---- Mapa del consultorio ---- */
+.mapa{
+  width:min(var(--inner-max,1140px),100%);
+  margin-inline:auto;
+  display:grid;
+  gap:var(--sp-4);
+}
+.mapa__datos{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--sp-3);
+}
+.mapa__direccion{
+  margin:0;
+  color:var(--ink-2);
+  font-size:.95rem;
+  line-height:1.5;
+}
+.mapa__direccion strong{color:var(--brand)}
+.mapa__lienzo{
+  border-radius:var(--r-card);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  border:1px solid var(--glass-border,transparent);
+  /* Más alto que ancho en móvil, apaisado en pantallas grandes: un mapa
+     cuadrado en el teléfono deja demasiada calle y poco edificio. */
+  aspect-ratio:4/3;
+}
+.mapa__lienzo iframe{
+  display:block;
+  width:100%;
+  height:100%;
+  border:0;
+  /* El mapa de Google llega muy saturado para este fondo; se atempera sin
+     llegar a volverlo ilegible. */
+  filter:saturate(.85) contrast(1.02);
+}
+
+/* ---- Pie de página ---- */
+.pie{
+  position:relative;
+  z-index:1;
+  padding:clamp(40px,6vw,64px) 20px calc(var(--nav-safe) + 8px);
+}
+.pie__inner{
+  width:min(var(--inner-max,1140px),100%);
+  margin-inline:auto;
+  padding:var(--inner-pad,24px);
+  border-radius:var(--inner-radius,24px);
+  background:var(--inner-bg,rgba(255,255,255,.78));
+  border:1px solid var(--inner-border,transparent);
+  box-shadow:var(--inner-shadow,none);
+  -webkit-backdrop-filter:var(--inner-blur,none);
+  backdrop-filter:var(--inner-blur,none);
+  display:grid;
+  gap:var(--sp-5);
+}
+.pie__nombre{
+  margin:0;
+  font-family:var(--font-display);
+  font-weight:500;
+  font-size:1.05rem;
+  color:var(--brand);
+  letter-spacing:-.01em;
+}
+.pie__meta{margin:4px 0 0;color:var(--ink-2);font-size:.88rem;line-height:1.55}
+/* El correo es un enlace de una línea: sin esto queda en 17px de alto y
+   es incómodo de tocar en el teléfono. */
+.pie__meta a{
+  color:var(--accent);
+  display:inline-block;
+  min-height:44px;
+  line-height:44px;
+}
+.pie__legal{margin:0;color:var(--ink-2);font-size:.78rem}
+
+/* ---- Aviso de privacidad plegable ---- */
+.aviso{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:var(--sp-3) 0;
+}
+.aviso summary{
+  cursor:pointer;
+  list-style:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--sp-3);
+  min-height:44px;
+  font:600 .92rem/1.3 var(--font-body);
+  color:var(--brand);
+}
+.aviso summary::-webkit-details-marker{display:none}
+.aviso summary::after{
+  content:"+";
+  font-size:1.3rem;
+  line-height:1;
+  color:var(--accent);
+  flex:none;
+}
+.aviso[open] summary::after{content:"−"}
+.aviso__cuerpo{
+  margin-top:var(--sp-4);
+  /* Medida de lectura: un texto legal a todo el ancho del pie es ilegible. */
+  max-width:72ch;
+}
+.aviso__cuerpo h3{
+  margin:var(--sp-5) 0 var(--sp-2);
+  font-size:.92rem;
+  font-weight:600;
+  color:var(--brand);
+  letter-spacing:0;
+}
+.aviso__cuerpo section:first-child h3{margin-top:0}
+.aviso__cuerpo p{margin:0 0 var(--sp-3);color:var(--ink-2);font-size:.85rem;line-height:1.6}
+.aviso__cuerpo ul{margin:0 0 var(--sp-3);padding:0;list-style:none;display:grid;gap:6px}
+.aviso__cuerpo li{
+  position:relative;
+  padding-left:18px;
+  color:var(--ink-2);
+  font-size:.85rem;
+  line-height:1.5;
+}
+.aviso__cuerpo li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.55em;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--accent);
+  opacity:.7;
+}
+.aviso__cierre{font-style:italic}
+.aviso__fecha{font-size:.78rem !important;opacity:.8}
+
+@media (min-width:768px){
+  .mapa__lienzo{aspect-ratio:21/9}
+  .pie__inner{gap:var(--sp-6)}
+}

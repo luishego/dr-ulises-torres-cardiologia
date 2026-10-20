@@ -1,0 +1,39 @@
+---
+/* Pie de página con el aviso de privacidad.
+   El aviso va dentro de un <details>: es un texto largo que casi nadie lee
+   de corrido, pero que debe estar accesible y enlazable. Plegado por
+   defecto, no empuja el contenido ni obliga a cambiar de página. */
+import { AVISO_PRIVACIDAD as A, SOBRE } from '../data/contenido';
+import { CONSULTORIO, CONTACTO, AVISO } from '../data/sitio';
+
+const anio = new Date().getFullYear();
+---
+<footer class="pie">
+  <div class="pie__inner">
+    <div class="pie__identidad">
+      <p class="pie__nombre">{SOBRE.nombre}</p>
+      <p class="pie__meta">{SOBRE.especialidades}</p>
+      <p class="pie__meta">
+        {CONSULTORIO.calle} · {CONSULTORIO.colonia}, {CONSULTORIO.ciudad}<br />
+        <a href={`mailto:${CONTACTO.correo}`}>{CONTACTO.correo}</a>
+      </p>
+    </div>
+
+    <details class="aviso" id="aviso-de-privacidad">
+      <summary>{A.titulo}</summary>
+      <div class="aviso__cuerpo">
+        {A.secciones.map((s) => (
+          <section>
+            <h3>{s.titulo}</h3>
+            {s.parrafos.map((p) => <p>{p}</p>)}
+            {'lista' in s && s.lista && <ul>{s.lista.map((li) => <li>{li}</li>)}</ul>}
+          </section>
+        ))}
+        <p class="aviso__cierre">{A.cierre}</p>
+        <p class="aviso__fecha">Última actualización: {AVISO.actualizado}</p>
+      </div>
+    </details>
+
+    <p class="pie__legal">© {anio} {SOBRE.nombre}. Todos los derechos reservados.</p>
+  </div>
+</footer>

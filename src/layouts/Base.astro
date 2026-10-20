@@ -13,10 +13,12 @@ import '../styles/secciones.css';
 import '../styles/responsive.css';
 import '../styles/cristal.css';
 import '../styles/tactil.css';
+import '../styles/pie.css';
 
 import Fondo from '../components/Fondo.astro';
 import FiltroCristal from '../components/FiltroCristal.astro';
 import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
 ---
 <!DOCTYPE html>
 <html lang="es-MX">
@@ -41,6 +43,8 @@ import Nav from '../components/Nav.astro';
   <main class="deck" id="deck">
     <slot />
   </main>
+
+  <Footer />
 
   <Nav />
 
