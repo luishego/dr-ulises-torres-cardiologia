@@ -91,9 +91,12 @@ export const CONFIANZA = {
     {
       icono: 'medalla',
       titulo: 'Certificación de consejo',
+      /* ⚠ Los dos folios son idénticos. Puede ser que el Consejo emita un
+         solo certificado para ambas, pero está sin confirmar. */
       datos: [
         { termino: 'Consejo', valor: 'Consejo Mexicano de Cardiología' },
-        { termino: 'Vigencia', valor: 'pendiente de confirmar', pendiente: true },
+        { termino: 'Cardiología clínica', valor: 'CMC2025-5612' },
+        { termino: 'Ecocardiografía en adultos', valor: 'CMC2025-5612' },
         { termino: 'Verificación', valor: 'Registro Nacional de Profesionistas (SEP)' },
       ] as Dato[],
     },

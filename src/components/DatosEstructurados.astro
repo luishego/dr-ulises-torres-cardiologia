@@ -22,6 +22,14 @@ const sitio = Astro.site!.href.replace(/\/$/, '');
 const cedulas = CONFIANZA.credenciales
   .find((c) => c.titulo === 'Cédulas profesionales')?.datos ?? [];
 
+/* Certificación de consejo. La lista mezcla el emisor y una nota de
+   verificación con los certificados, así que éstos se reconocen por el
+   folio: son los únicos cuyo valor empieza por CMC. */
+const consejo = CONFIANZA.credenciales
+  .find((c) => c.titulo === 'Certificación de consejo')?.datos ?? [];
+const emisor = consejo.find((d) => d.termino === 'Consejo')?.valor;
+const certificaciones = consejo.filter((d) => /^CMC/.test(d.valor));
+
 const datos = {
   '@context': 'https://schema.org',
   '@type': 'Physician',
@@ -66,10 +74,15 @@ const datos = {
     name: d.termino,
     value: d.valor,
   })),
-  memberOf: {
-    '@type': 'MedicalOrganization',
-    name: 'Consejo Mexicano de Cardiología',
-  },
+  /* hasCredential y no memberOf: estar certificado por un consejo no es lo
+     mismo que ser miembro de él, y el vocabulario distingue las dos cosas. */
+  hasCredential: certificaciones.map((d) => ({
+    '@type': 'EducationalOccupationalCredential',
+    credentialCategory: 'Certificación de consejo',
+    name: d.termino,
+    identifier: d.valor,
+    recognizedBy: { '@type': 'Organization', name: emisor },
+  })),
   /* Sin el fragmento: sameAs identifica el perfil, no el enlace profundo a
      la sección de agenda que usan los botones de la página. */
   sameAs: [enlaceDoctorialia().split('#')[0]],
