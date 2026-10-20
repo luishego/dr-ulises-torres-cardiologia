@@ -4,14 +4,14 @@
 **Dirección visual:** Cristal · obra a sangre completa detrás de paneles de vidrio con refracción.
 
 Proyecto **Astro** estático. Una sola página, sin SSR ni adaptador: el build produce `dist/`
-y ese directorio se sube tal cual a Cloudflare Pages.
+y ese directorio se publica tal cual como assets de un Worker de Cloudflare.
 
 ```bash
 npm install
 npm run dev       # desarrollo con recarga
 npm run build     # genera dist/
 npm run preview   # sirve dist/ localmente
-npm run deploy    # build + wrangler pages deploy
+npm run deploy    # build + wrangler deploy
 ```
 
 ## Estructura
@@ -106,13 +106,30 @@ Build servido por HTTP, con emulación de dispositivo, a 320, 375, 768, 1000 y 1
 
 Safari en iOS no se puede probar desde aquí: quedan las zonas seguras del notch y si el
 `backdrop-filter` parpadea al desplazarse, un defecto conocido de WebKit con capas fijas.
+
 ## Despliegue
 
-Cloudflare Workers, proyecto `dr-ulises-torres-cardiologia` en la cuenta
-`adminsolcre@gmail.com`, con dominio propio en **www.drulisestorres.com**. El despliegue se
-dispara desde GitHub; `_headers` y `robots.txt` viajan desde `public/`.
+Cloudflare **Workers** (no Pages), Worker `dr-ulises-torres-cardiologia` en la cuenta
+`adminsolcre@gmail.com`, con dominio propio en **www.drulisestorres.com**. El `dist/` viaja
+como assets estáticos del Worker, según `wrangler.toml`; `_headers`, `robots.txt` y las
+imágenes salen de `public/`.
+
+Publicar a mano, desde este directorio:
+
+```bash
+npm run deploy
+```
+
+Ojo con dos confusiones fáciles:
+
+- **No es un proyecto de Pages.** `wrangler pages deploy` falla con «Project not found» y
+  `wrangler pages project list` sale vacío. El comando correcto es `wrangler deploy`.
+- **No hay build automático todavía.** El repo en GitHub no está conectado a Workers Builds,
+  así que un `git push` no publica nada: todas las versiones del Worker tienen origen
+  «Upload». Mientras no se conecte, cada cambio necesita un `npm run deploy` explícito.
 
 | | Estado |
 |---|---|
-| Indexación | **Bloqueada** por `<meta robots>` (vía `META.indexable`), `robots.txt` y `X-Robots-Tag`. Quitarlo cuando el aviso de privacidad tenga visto bueno legal |
+| Indexación | **Abierta.** Sin `<meta robots>` ni `X-Robots-Tag`, `robots.txt` en `Allow: /` y sitemap en `/sitemap-index.xml` |
+| Aviso de privacidad | Adaptado de otro consultorio y ya público. **Revisión legal pendiente**, igual que el código postal del consultorio |
 | Repositorio | Público. Lleva las cédulas reales del Dr. Torres, que de todos modos son registro público en la SEP |

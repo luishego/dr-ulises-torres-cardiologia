@@ -1,0 +1,8 @@
+# Worker de assets estáticos: no hay código de servidor, sólo el dist/ de Astro.
+# El proyecto en Cloudflare es un Worker (no un proyecto de Pages), así que el
+# comando correcto es `wrangler deploy`, nunca `wrangler pages deploy`.
+name = "dr-ulises-torres-cardiologia"
+compatibility_date = "2026-10-20"
+
+[assets]
+directory = "./dist"
