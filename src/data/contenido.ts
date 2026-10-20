@@ -1,22 +1,29 @@
-/* =========================================================================
-   Contenido de las cinco secciones.
-   PENDIENTE: este texto lo redactó la agencia para la sesión de validación.
-   NO está aprobado por el Dr. Torres. Revisar con él antes de publicar.
-
-   Los valores marcados con `pendiente: true` se pintan en cursiva con
-   subrayado punteado. Es deliberado: en un sitio que enseña credenciales
-   médicas, un dato inventado que parezca real es peor que un hueco visible.
-   ========================================================================= */
-
 export type Dato = { termino: string; valor: string; pendiente?: boolean };
 
 export const HERO = {
-  eyebrow: 'Medicina Interna · Cardiología',
-  titulo: 'El corazón se entiende mejor cuando se mira al paciente completo.',
-  lead: 'Consulta de medicina interna, cardiología y ecocardiografía transesofágica. Estudio a fondo cada caso antes de proponer un tratamiento: primero entender, después indicar.',
-  ctaPrimario: 'Agendar consulta',
-  ctaSecundario: 'Ver servicios',
-  // PENDIENTE: retrato profesional, 4:5, lado mayor ≥ 1600 px.
+  eyebrow: 'Cardiología · Ecocardiografía',
+  titulo: 'Diagnóstico cardiológico de alta precisión.',
+  lead: 'Agenda tu estudio hoy mismo con la tranquilidad de estar en manos de un especialista. Combinamos calidez humana y excelencia técnica para entregar resultados rápidos y confiables que facilitan el trabajo de los médicos tratantes y cuidan la salud de nuestros pacientes.  ',
+  ctaPrimario: 'Agendar estudio',
+  ctaSecundario: 'Ver servicios'  
+} as const;
+
+export const SOBRE = {
+  eyebrow: 'Sobre el Dr. Torres',
+  titulo: '',
+  nombre: 'Dr. Ulises Torres Aguiñaga',
+  especialidades: 'Medicina Interna · Cardiología · Ecocardiografía',
+  datos: [
+    { sigla: 'UNAM', texto: 'Formación de licenciatura y especialidad' },
+    { sigla: '00', siglaPendiente: true, texto: 'Años de práctica clínica', textoPendiente: 'pendiente de confirmar' },
+    { sigla: 'ETE', texto: 'Ecocardiografía transesofágica realizada por el propio médico tratante' },
+  ],
+  parrafos: [
+    'Mi trayectoria comenzó en la medicina interna, la especialidad que obliga a entender al paciente de manera integral antes de aislar un órgano.',
+    'Esa perspectiva clínica es la que aplico en cada procedimiento: sé exactamente qué buscar y cómo correlacionar los hallazgos ecocardiográficos con el estado general del cuerpo.',
+    'La ecocardiografía transesofágica me permite ver estructuras que un ecocardiograma convencional no alcanza, ofreciendo un diagnóstico certero.',
+    'Al concluir el procedimiento, puedo determinar cuál es el hallazgo anatómico exacto, qué conducta clínica sugiere la evidencia y el reporte detallado listo para guiar el tratamiento',
+  ],
   retrato: {
     pendiente: true,
     leyenda: 'Retrato profesional · imagen de alta resolución pendiente',
@@ -24,62 +31,48 @@ export const HERO = {
   },
 } as const;
 
-export const SOBRE = {
-  eyebrow: 'Sobre el Dr. Torres',
-  titulo: 'Primero internista. Después cardiólogo.',
-  nombre: 'Dr. Ulises Torres Aguiñaga',
-  especialidades: 'Medicina Interna · Cardiología · Ecocardiografía Transesofágica',
-  datos: [
-    { sigla: 'UNAM', texto: 'Formación de licenciatura y especialidad' },
-    { sigla: '00', siglaPendiente: true, texto: 'Años de práctica clínica', textoPendiente: 'pendiente de confirmar' },
-    { sigla: 'ETE', texto: 'Ecocardiografía transesofágica realizada por el propio médico tratante' },
-  ],
-  parrafos: [
-    'Mi formación empezó en medicina interna: la especialidad que obliga a mirar al paciente completo antes de mirar un solo órgano. Sobre esa base construí la cardiología.',
-    'Por eso, cuando alguien llega con dolor de pecho, palpitaciones o presión alta, la pregunta no es únicamente qué le está pasando al corazón, sino qué está pasando en el resto del cuerpo para que el corazón responda así. Riñón, tiroides, control de la glucosa y medicamentos previos forman parte del mismo diagnóstico.',
-    'Trabajo con estudios, no con suposiciones. La ecocardiografía transesofágica permite ver estructuras que un ecocardiograma convencional no alcanza —válvulas, aurícula izquierda, prótesis— y decidir con evidencia en lugar de probabilidad.',
-    'Cada consulta termina con tres cosas claras: qué tiene, qué vamos a hacer y cuándo nos volvemos a ver.',
-  ],
-} as const;
-
 export const SERVICIOS = {
   eyebrow: 'Servicios',
-  titulo: 'Tres frentes, un mismo criterio clínico.',
-  lead: 'Consulta privada y estudio diagnóstico, con seguimiento del mismo médico de principio a fin.',
+  titulo: 'Estudios de imagen',
+  lead: 'Estudio diagnóstico.',
+  cta: 'Agendar estudio',
   items: [
     {
-      icono: 'estetoscopio',
-      titulo: 'Medicina Interna',
-      texto: 'Diagnóstico integral del paciente adulto, incluido el manejo de varias condiciones a la vez sin que un tratamiento estorbe al otro.',
-      puntos: ['Hipertensión, diabetes y dislipidemia', 'Enfermedad tiroidea y renal', 'Valoración preoperatoria', 'Interpretación de estudios de laboratorio'],
+      icono: 'trazo',
+      titulo: 'Ecocardiograma transtorácico',
+      texto: 'Ultrasonido del corazón que muestra en tiempo real su tamaño, la fuerza con la que bombea y el funcionamiento de sus válvulas. No duele, no usa radiación y no requiere preparación especial. Dura entre 30 y 45 minutos.',
     },
     {
       icono: 'corazon',
-      titulo: 'Cardiología',
-      texto: 'Atención del corazón y los vasos, desde el síntoma agudo hasta el control del riesgo a largo plazo.',
-      puntos: ['Dolor torácico y palpitaciones', 'Insuficiencia cardiaca', 'Hipertensión de difícil control', 'Seguimiento posterior a infarto'],
+      titulo: 'Ecocardiograma bidimensional',
+      texto: 'AtEstudio de ultrasonido que obtiene imágenes del corazón en cortes, para valorar su estructura y movimiento. Es la base de la evaluación cardiológica y se usa para revisión inicial o seguimiento.',
+    },
+    {
+      icono: 'corazon',
+      titulo: 'Ecocardiograma de esfuerzo',
+      texto: 'Compara el corazón en reposo y durante el ejercicio en banda o bicicleta. Cuando el paciente no puede ejercitarse, se usa un medicamento que simula el esfuerzo. Ayuda a detectar si el corazón recibe suficiente sangre cuando trabaja más (enfermedad coronaria) y a valorar algunas enfermedades de las válvulas. Requiere indicaciones previas sobre ayuno, ropa cómoda y medicamentos.',
     },
     {
       icono: 'trazo',
-      titulo: 'Ecocardiografía Transesofágica',
-      texto: 'El estudio que ve lo que el ecocardiograma convencional no alcanza. Se realiza con sedación y toma alrededor de 30 minutos.',
-      puntos: ['Valvulopatías y prótesis valvulares', 'Búsqueda de trombos en aurícula izquierda', 'Sospecha de endocarditis infecciosa', 'Estudio previo a cardioversión o ablación'],
-    },
+      titulo: 'Ecocardiograma contrastado',
+      texto: 'Durante el ultrasonido se aplica en la vena una solución con microburbujas que mejora la nitidez de las imágenes. Sirve cuando la imagen convencional no es clara, o para buscar comunicaciones anormales entre las cavidades del corazón, como el foramen oval permeable. Es un procedimiento seguro y bien tolerado.',
+    }
   ],
 } as const;
 
 export const CONFIANZA = {
   eyebrow: 'Confianza',
-  titulo: 'Formación verificable, práctica hospitalaria.',
-  lead: 'Toda credencial mostrada aquí puede comprobarse en registros públicos.',
+  titulo: 'Mi formación como medico y mi práctica clínica.',
+  lead: 'Mi formación es continua, mi experiencia profesional abarca la práctica en hospitales públicos y privados.',
   credenciales: [
     {
       icono: 'birrete',
-      titulo: 'Universidad Nacional Autónoma de México',
+      titulo: 'Formación académica',
       datos: [
-        { termino: 'Licenciatura', valor: 'Médico Cirujano — Facultad de Medicina' },
-        { termino: 'Especialidad', valor: 'Medicina Interna' },
-        { termino: 'Subespecialidad', valor: 'Cardiología' },
+        { termino: 'Licenciatura', valor: 'Médico Cirujano - Facultad de Medicina, UNAM.' },
+        { termino: 'Especialidad', valor: 'Medicina Interna - Hospital Adolfo López Mateos, ISSSTE.' },
+        { termino: 'Subespecialidad', valor: 'Cardiología - Instituto Nacional de Cardiología Ignacio Chávez.' },
+        { termino: 'Alta especialidad', valor: 'Ecocardiografía - Instituto Nacional de Ciencias Médicas y Nutrición Salvador Zubirán.' },
       ] as Dato[],
     },
     {
@@ -95,9 +88,9 @@ export const CONFIANZA = {
       icono: 'hospital',
       titulo: 'Práctica hospitalaria',
       datos: [
-        { termino: 'Hospital', valor: 'nombre pendiente de confirmar', pendiente: true },
-        { termino: 'Consultorio', valor: 'dirección pendiente de confirmar', pendiente: true },
-        { termino: 'Atención', valor: 'Consulta externa y valoración hospitalaria' },
+        { termino: 'Hospital', valor: 'Hospital Adolfo López Mateos ISSSTE, Unidad Coronaria y Terapia Postquirúrgica Cardiaca' },
+        { termino: 'Hospital', valor: 'Hospital Polar San José. Unidad de Terapia Intensiva' },
+        { termino: 'Atención', valor: 'Centro de Alta Especialidad Cardiovascular | CardioVID®' },
       ] as Dato[],
     },
     {

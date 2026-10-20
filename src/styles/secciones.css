@@ -1,7 +1,3 @@
-/* =========================================================================
-   7. SECCIONES
-   ========================================================================= */
-/* --- Hero --- */
 .hero{
   display:grid;
   grid-template-columns:minmax(0,1.05fr) minmax(0,.85fr);
@@ -12,8 +8,6 @@
 .hero__media{margin:0}
 .foto{
   position:relative;
-  /* Gobernada por ancho en todos los tamaños. Cuando iba por 'height' con
-     aspect-ratio, el ancho derivado del ratio se salía del contenedor. */
   aspect-ratio:1/1;
   width:100%;
   max-width:100%;

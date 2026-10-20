@@ -27,7 +27,6 @@
   .contact{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)}
   .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
   .hero__media{max-width:420px}
-  .foto{aspect-ratio:4/5}
 }
 
 @media (prefers-reduced-motion:reduce){

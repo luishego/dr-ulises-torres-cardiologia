@@ -28,7 +28,7 @@ export const CONTACTO = {
 export const META = {
   titulo: 'Dr. Ulises Torres Aguiñaga — Medicina Interna y Cardiología',
   descripcion:
-    'Dr. Ulises Torres Aguiñaga. Medicina interna, cardiología y ecocardiografía transesofágica.',
+    'Dr. Ulises Torres Aguiñaga. Medicina interna, cardiología y ecocardiografía.',
   // El sitio aún no es público: no debe indexarse hasta validar el copy y
   // completar las credenciales. Ver README.
   indexable: false,
@@ -37,11 +37,9 @@ export const META = {
 export const enlaceWhatsapp = () =>
   `https://wa.me/${CONTACTO.whatsapp}?text=${encodeURIComponent(CONTACTO.mensajeWhatsapp)}`;
 
+export const enlaceDoctorialia = () => `https://www.doctoralia.com.mx/nova/profiles/doctor/540022#doctor-profile-services`;
 export const enlaceCorreo = () =>
   `mailto:${CONTACTO.correo}?subject=${encodeURIComponent(CONTACTO.asuntoCorreo)}`;
-
-/** Secciones del recorrido. El orden manda en la página y en la navegación.
- *  `corto` es la etiqueta del menú en móvil, donde el nombre largo no cabe. */
 export const SECCIONES = [
   { id: 'inicio',    largo: 'Inicio',              corto: 'Inicio',    aria: 'Inicio' },
   { id: 'sobre',     largo: 'Sobre el Dr. Torres', corto: 'Perfil',    aria: 'Sobre el Dr. Torres' },

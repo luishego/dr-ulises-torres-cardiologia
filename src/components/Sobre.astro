@@ -1,26 +1,35 @@
 ---
-import { SOBRE } from '../data/contenido';
+import { SOBRE } from "../data/contenido";
 ---
+
 <section class="panel" id="sobre" aria-labelledby="t-sobre">
   <div class="panel__inner split">
     <div>
       <p class="eyebrow">{SOBRE.eyebrow}</p>
       <h2 id="t-sobre">{SOBRE.titulo}</h2>
       <div class="rule"></div>
-      <div class="plate">
-        <strong>{SOBRE.nombre}</strong>
-        <span>{SOBRE.especialidades}</span>
-      </div>
-      <div class="facts">
-        {SOBRE.datos.map((d) => (
-          <div class="fact">
-            <b class={'siglaPendiente' in d && d.siglaPendiente ? 'ph' : undefined}>{d.sigla}</b>
-            <span>
-              {d.texto}{'textoPendiente' in d && d.textoPendiente && <> — <span class="ph">{d.textoPendiente}</span></>}
-            </span>
-          </div>
-        ))}
-      </div>
+      <figure class="hero__media">
+        <div class="foto" role="img" aria-label={SOBRE.retrato.alt}>
+          <img
+            class="foto"
+            src="/img/dr-torres.jpg"
+            alt="Dr. Ulises Torres Aguiñaga, médico internista y cardiólogo"
+          />
+        </div>
+        <figcaption class="hero__ecg" aria-hidden="true">
+          <svg
+            viewBox="0 0 400 34"
+            preserveAspectRatio="none"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M0 20h120l10-12 9 24 10-27 9 15 8-6h224"></path>
+          </svg>
+        </figcaption>
+      </figure>
     </div>
     <div class="prose">
       {SOBRE.parrafos.map((p) => <p>{p}</p>)}

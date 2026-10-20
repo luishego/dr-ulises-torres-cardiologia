@@ -1,7 +1,9 @@
 ---
-import Icono from './Icono.astro';
-import { SERVICIOS } from '../data/contenido';
+import Icono from "./Icono.astro";
+import { SERVICIOS } from "../data/contenido";
+import { enlaceDoctorialia } from "../data/sitio";
 ---
+
 <section class="panel" id="servicios" aria-labelledby="t-servicios">
   <div class="panel__inner">
     <p class="eyebrow">{SERVICIOS.eyebrow}</p>
@@ -9,15 +11,31 @@ import { SERVICIOS } from '../data/contenido';
     <div class="rule"></div>
     <p class="lead">{SERVICIOS.lead}</p>
 
-    <div class="grid-3">
-      {SERVICIOS.items.map((s) => (
-        <article class="card">
-          <div class="card__icon"><Icono nombre={s.icono} /></div>
-          <h3>{s.titulo}</h3>
-          <p>{s.texto}</p>
-          <ul>{s.puntos.map((p) => <li>{p}</li>)}</ul>
-        </article>
-      ))}
+    <div class="grid-2 grid-3@md" role="list">
+      {
+        SERVICIOS.items.map((s) => (
+          <article class="card">
+            <div class="card__header">
+              <h3>{s.titulo}</h3>
+              <a class="card__icon">
+                <Icono nombre={s.icono} />
+              </a>
+            </div>
+            <p>{s.texto}</p>
+            <div class="cta-row">
+              <a
+                class="btn btn--primary btn--lg"
+                href={enlaceDoctorialia()}
+                rel="noopener"
+                target="_blank"
+              >
+                <Icono nombre="calendario" />
+                {SERVICIOS.cta}
+              </a>
+            </div>
+          </article>
+        ))
+      }
     </div>
   </div>
 </section>
