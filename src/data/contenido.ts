@@ -115,8 +115,8 @@ export const CONTACTO_SECCION = {
     texto: 'Ante dolor de pecho intenso, desmayo o dificultad para respirar, acuda de inmediato al servicio de urgencias más cercano o llame al 911.',
   },
   datos: [
-    { termino: 'Consultorio', valor: 'dirección pendiente', pendiente: true },
-    { termino: 'Teléfono / WhatsApp', valor: 'número pendiente', pendiente: true },
+    { termino: 'Consultorio', valor: `${CONSULTORIO.calle} · ${CONSULTORIO.colonia}` },
+    { termino: 'Teléfono / WhatsApp', valor: CONTACTO.telefonoLegible },
     { termino: 'Horario', valor: HORARIO.texto },
     { termino: 'Primera consulta', valor: 'Traiga estudios previos, electrocardiogramas y la lista de medicamentos que toma.' },
   ],
@@ -137,7 +137,7 @@ export const CONTACTO_SECCION = {
    Los datos del Responsable se leen de sitio.ts para que no haya dos
    verdades sobre la dirección o el correo.
    ========================================================================= */
-import { CONSULTORIO, AVISO, HORARIO } from './sitio';
+import { CONSULTORIO, CONTACTO, AVISO, HORARIO } from './sitio';
 
 export const AVISO_PRIVACIDAD = {
   titulo: 'Aviso de privacidad',

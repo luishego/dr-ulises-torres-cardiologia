@@ -1,22 +1,42 @@
 ---
+/* Portada a dos columnas desde 1000px: el discurso a la izquierda, los
+   hechos a la derecha.
+
+   Antes era una sola columna de 989px con un párrafo de 667 —.lead tiene
+   max-width:56ch— así que el titular corría 322px más a la derecha que el
+   texto de debajo y esa esquina se leía como un hueco, no como aire.
+   Acotando la columna, titular y párrafo comparten medida.
+
+   Los datos no son nuevos: CONTACTO_SECCION.datos llevaba semanas escrito
+   sin que ningún componente lo renderizara, y .data es la rejilla que el
+   diseño ya tenía preparada para él. */
 import Icono from './Icono.astro';
-import { HERO } from '../data/contenido';
+import { HERO, CONTACTO_SECCION } from '../data/contenido';
 import { enlaceWhatsapp } from '../data/sitio';
 ---
 <section class="panel" id="inicio" aria-labelledby="t-inicio">
   <div class="panel__inner">
-    <div>
+    <div class="inicio__discurso">
       <p class="eyebrow">{HERO.eyebrow}</p>
       <h1 id="t-inicio">{HERO.titulo}</h1>
       <div class="rule"></div>
       <p class="lead">{HERO.lead}</p>
       <div class="cta-row">
-        <a class="btn btn--primary btn--lg" href={enlaceWhatsapp()} rel="noopener" target="_blank">
+        <a class="btn btn--primary btn--lg" href={enlaceWhatsapp()} target="_blank" rel="noopener">
           <Icono nombre="calendario" />
           {HERO.ctaPrimario}
         </a>
         <a class="btn btn--ghost btn--lg" href="#servicios">{HERO.ctaSecundario}</a>
       </div>
     </div>
+
+    <dl class="data inicio__datos">
+      {CONTACTO_SECCION.datos.map((d) => (
+        <div>
+          <dt>{d.termino}</dt>
+          <dd>{d.valor}</dd>
+        </div>
+      ))}
+    </dl>
   </div>
 </section>

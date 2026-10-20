@@ -1,5 +1,11 @@
 export const CONTACTO = {
   whatsapp: '525519494848',
+  /** El mismo número que wa.me, pero legible. Se deriva para que no haya
+   *  dos versiones que puedan dejar de coincidir. */
+  get telefonoLegible() {
+    const n = this.whatsapp;
+    return `+${n.slice(0, 2)} ${n.slice(2, 4)} ${n.slice(4, 8)} ${n.slice(8)}`;
+  },
   correo: 'drtorres.cardioeco@gmail.com',
   mensajeWhatsapp: 'Hola Dr. Torres, me gustaría agendar una consulta.',
   asuntoCorreo: 'Solicitud de consulta',

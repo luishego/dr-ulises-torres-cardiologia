@@ -7,6 +7,10 @@
    .hero tampoco aplica: el Hero dejó de llevar esa clase al quitarse el
    retrato de la portada. Solo .split sigue en uso, en Sobre. */
 .split{grid-template-columns:1fr;gap:clamp(24px,3vw,40px)}
+/* Portada: en teléfono los datos van debajo del discurso, sin rejilla. El
+   aire que los separa se declara aquí y sigue valiendo en escritorio, donde
+   además baja la columna derecha hasta la altura del titular. */
+.inicio__datos{margin-top:calc(var(--sp-5) * var(--air))}
 .contact{gap:clamp(24px,3vw,40px)}
 .grid-3,.grid-2{grid-template-columns:1fr}
 .hero__media{max-width:none}
@@ -26,6 +30,15 @@
    El corte va en 1000px y no en 1025 para que un portátil o iPad de 1024
    reciba el layout de dos columnas: apilado a esa altura no cabía nada. */
 @media (min-width:1000px){
+  /* La portada se abre. Al revés que Sobre: aquí manda el texto, y la
+     columna de datos es la estrecha. Acotar la izquierda es lo que pone
+     titular y párrafo en la misma medida. */
+  #inicio .panel__inner{
+    display:grid;
+    grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+    gap:clamp(32px,4vw,64px);
+    align-items:start;
+  }
   .split{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
   .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
   .hero__media{max-width:420px}
