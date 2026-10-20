@@ -21,6 +21,19 @@ export const CONSULTORIO = {
   },
 } as const;
 
+/** Horario de consulta. Los días en inglés son los que exige schema.org;
+ *  `texto` es lo que lee el visitante. Los dos salen de aquí porque Google
+ *  compara el marcado con lo que la página muestra, y si no coincide
+ *  retira el resultado enriquecido. */
+export const HORARIO = {
+  dias: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+  abre: '10:00',
+  cierra: '13:00',
+  get texto() {
+    return `Lunes a viernes, de ${this.abre} a ${this.cierra} h`;
+  },
+} as const;
+
 /** Datos del Responsable para la Ley Federal de Protección de Datos
  *  Personales en Posesión de los Particulares. */
 export const AVISO = {

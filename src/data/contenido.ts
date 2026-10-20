@@ -113,7 +113,7 @@ export const CONTACTO_SECCION = {
   datos: [
     { termino: 'Consultorio', valor: 'dirección pendiente', pendiente: true },
     { termino: 'Teléfono / WhatsApp', valor: 'número pendiente', pendiente: true },
-    { termino: 'Horario', valor: 'Lunes a viernes', cola: 'horario pendiente de confirmar' },
+    { termino: 'Horario', valor: HORARIO.texto },
     { termino: 'Primera consulta', valor: 'Traiga estudios previos, electrocardiogramas y la lista de medicamentos que toma.' },
   ],
 } as const;
@@ -133,7 +133,7 @@ export const CONTACTO_SECCION = {
    Los datos del Responsable se leen de sitio.ts para que no haya dos
    verdades sobre la dirección o el correo.
    ========================================================================= */
-import { CONSULTORIO, AVISO } from './sitio';
+import { CONSULTORIO, AVISO, HORARIO } from './sitio';
 
 export const AVISO_PRIVACIDAD = {
   titulo: 'Aviso de privacidad',

@@ -8,11 +8,11 @@
    contradiciéndose, y una contradicción entre el marcado y la página es
    justo lo que Google penaliza.
 
-   Lo que NO está aquí es deliberado. Sin horario confirmado no hay
-   openingHours, sin coordenadas verificadas no hay geo, y sin reseñas
-   propias no hay aggregateRating. Inventar cualquiera de los tres es peor
-   que omitirlo: Google contrasta el marcado contra la realidad. */
-import { CONSULTORIO, CONTACTO, META, enlaceDoctorialia } from '../data/sitio';
+   Lo que NO está aquí es deliberado. Sin coordenadas verificadas no hay
+   geo, y sin reseñas propias no hay aggregateRating (las de Doctoralia son
+   de Doctoralia). Inventar cualquiera de las dos es peor que omitirla:
+   Google contrasta el marcado contra la realidad. */
+import { CONSULTORIO, CONTACTO, HORARIO, META, enlaceDoctorialia } from '../data/sitio';
 import { SOBRE, SERVICIOS, CONFIANZA } from '../data/contenido';
 
 const sitio = Astro.site!.href.replace(/\/$/, '');
@@ -47,6 +47,16 @@ const datos = {
     '@type': 'City',
     name: CONSULTORIO.ciudad,
   },
+  /* El mismo horario que la ficha del mapa muestra en texto. Es lo que
+     responde al «¿está abierto ahora?» de una búsqueda local. */
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: HORARIO.dias,
+      opens: HORARIO.abre,
+      closes: HORARIO.cierra,
+    },
+  ],
   availableService: SERVICIOS.items.map((s) => ({
     '@type': 'ImagingTest',
     name: s.titulo,

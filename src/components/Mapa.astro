@@ -1,6 +1,6 @@
 ---
 
-import { CONSULTORIO } from '../data/sitio';
+import { CONSULTORIO, HORARIO } from '../data/sitio';
 
 const consulta = encodeURIComponent(CONSULTORIO.consulta);
 const incrustado = `https://www.google.com/maps?q=${consulta}&output=embed`;
@@ -10,7 +10,8 @@ const comoLlegar = `https://www.google.com/maps/dir/?api=1&destination=${consult
   <div class="mapa__datos">
     <p class="mapa__direccion">
       <strong>{CONSULTORIO.calle}</strong><br />
-      {CONSULTORIO.colonia} · {CONSULTORIO.ciudad}
+      {CONSULTORIO.colonia} · {CONSULTORIO.ciudad}<br />
+      <span class="mapa__horario">{HORARIO.texto}</span>
     </p>
     <a class="btn btn--ghost" href={comoLlegar} target="_blank" rel="noopener">Cómo llegar</a>
   </div>
