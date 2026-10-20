@@ -28,7 +28,10 @@ const anio = new Date().getFullYear();
     </p>
 
     <p class="pie__legal">
-      © {anio} · <a class="pie__firma" href={`mailto:${AGENCIA.correo}`}>Made with ❤️ by {AGENCIA.nombre} team</a>
+      {/* El corazón se oculta al lector de pantalla, que si no lo lee como
+          "red heart", y la palabra que sustituye va oculta a la vista. Así
+          se escucha "Made with love by…" y se sigue viendo el emoji. */}
+      © {anio} · <a class="pie__firma" href={`mailto:${AGENCIA.correo}`}>Made with <span aria-hidden="true">❤️</span><span class="sr-only">love</span> by {AGENCIA.nombre} team</a>
     </p>
   </div>
 </footer>
