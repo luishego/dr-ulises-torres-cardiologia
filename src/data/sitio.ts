@@ -32,8 +32,11 @@ export const AVISO = {
 
 export const META = {
   titulo: 'Dr. Ulises Torres Aguiñaga — Medicina Interna, Cardiología y Ecocardiografía',
+  /* Para el resultado de búsqueda, no para repetir el título. Lleva lo que
+     decide un clic: quién, qué estudios, dónde y qué hacer. Google corta
+     cerca de 160 caracteres, así que lo importante va al principio. */
   descripcion:
-    'Dr. Ulises Torres Aguiñaga. Medicina interna, cardiología y ecocardiografía.',
+    'Dr. Ulises Torres, cardiólogo e internista en la Roma Sur, CDMX. Ecocardiograma transtorácico, de esfuerzo y contrastado. Agenda por WhatsApp.',
   indexable: true,
   /** Vista previa al compartir el enlace. Ruta relativa: Base.astro la
    *  vuelve absoluta contra `site`, que es lo que exige Open Graph. */

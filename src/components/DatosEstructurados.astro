@@ -1,0 +1,68 @@
+---
+/* Datos estructurados schema.org/Physician.
+   Es lo que alimenta el panel lateral de Google y las búsquedas locales
+   («cardiólogo Roma Sur»), que para un consultorio físico pesan más que el
+   sitemap.
+
+   Todo sale de sitio.ts y contenido.ts: un dato escrito dos veces acaba
+   contradiciéndose, y una contradicción entre el marcado y la página es
+   justo lo que Google penaliza.
+
+   Lo que NO está aquí es deliberado. Sin horario confirmado no hay
+   openingHours, sin coordenadas verificadas no hay geo, y sin reseñas
+   propias no hay aggregateRating. Inventar cualquiera de los tres es peor
+   que omitirlo: Google contrasta el marcado contra la realidad. */
+import { CONSULTORIO, CONTACTO, META, enlaceDoctorialia } from '../data/sitio';
+import { SOBRE, SERVICIOS, CONFIANZA } from '../data/contenido';
+
+const sitio = Astro.site!.href.replace(/\/$/, '');
+
+/* Las cédulas son registro público en la SEP y ya se muestran en la página,
+   así que el marcado sólo repite lo que el visitante ve. */
+const cedulas = CONFIANZA.credenciales
+  .find((c) => c.titulo === 'Cédulas profesionales')?.datos ?? [];
+
+const datos = {
+  '@context': 'https://schema.org',
+  '@type': 'Physician',
+  '@id': `${sitio}/#medico`,
+  name: SOBRE.nombre,
+  description: META.descripcion,
+  url: `${sitio}/`,
+  logo: `${sitio}/Logo.svg`,
+  image: `${sitio}${META.imagen}`,
+  telephone: `+${CONTACTO.whatsapp}`,
+  email: CONTACTO.correo,
+  knowsLanguage: 'es-MX',
+  medicalSpecialty: ['Cardiovascular', 'InternalMedicine'],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: `${CONSULTORIO.calle}, ${CONSULTORIO.colonia}`,
+    addressLocality: CONSULTORIO.ciudad,
+    addressRegion: 'Ciudad de México',
+    postalCode: CONSULTORIO.cp,
+    addressCountry: 'MX',
+  },
+  areaServed: {
+    '@type': 'City',
+    name: CONSULTORIO.ciudad,
+  },
+  availableService: SERVICIOS.items.map((s) => ({
+    '@type': 'ImagingTest',
+    name: s.titulo,
+  })),
+  identifier: cedulas.map((d) => ({
+    '@type': 'PropertyValue',
+    name: d.termino,
+    value: d.valor,
+  })),
+  memberOf: {
+    '@type': 'MedicalOrganization',
+    name: 'Consejo Mexicano de Cardiología',
+  },
+  /* Sin el fragmento: sameAs identifica el perfil, no el enlace profundo a
+     la sección de agenda que usan los botones de la página. */
+  sameAs: [enlaceDoctorialia().split('#')[0]],
+};
+---
+<script type="application/ld+json" is:inline set:html={JSON.stringify(datos)} />
